@@ -1,0 +1,11 @@
+body {
+	background-color: #202830;
+	color: white;
+}
+.title {
+	font-family: Arial;
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+	text-align: center;
+}
