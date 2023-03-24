@@ -27,6 +27,10 @@ body {
 	margin: auto;
 	width: 50%;
 }
+.centered {
+	margin: auto;
+	width: 50%;
+}
 
 
 @font-face {
