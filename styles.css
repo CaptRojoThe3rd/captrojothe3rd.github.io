@@ -8,4 +8,12 @@ body {
 	width: 50%;
 	padding: 10px;
 	text-align: center;
+	font-size: 30px;
+}
+.normal-centered-text {
+	font-family: serif;
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+	text-align: center;
 }
