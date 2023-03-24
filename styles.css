@@ -17,6 +17,15 @@ body {
 	width: 50%;
 	text-align: center;
 	font-size: 14px;
+	margin-top: -30px;
+	margin-bottom: 50px;
+}
+.minecraftia-centered-text {
+	font-family: "Minecraftia";
+	font-size: 14px;
+	text-align: center;
+	margin: auto;
+	width: 50%;
 }
 
 
