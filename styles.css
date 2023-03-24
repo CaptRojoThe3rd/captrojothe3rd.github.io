@@ -3,7 +3,15 @@ body {
 	color: white;
 }
 
-
+.top-area {
+	background-color: #303850;
+	height: 125px;
+	margin-left: -8px;
+	margin-top: -30px;
+	margin-right: -8px;
+	margin-bottom: 50px;
+	padding: 5px;
+}
 .title {
 	font-family: "Minecraftia";
 	font-size: 30px;
@@ -27,7 +35,7 @@ body {
 	margin: auto;
 	width: 50%;
 }
-.centered {
+.yt-sub-button-centered {
 	margin: auto;
 	width: 166px;
 }
