@@ -26,9 +26,6 @@ function sort_and_calculate(calculate_data) {
         return;
     }
     // Convert user input into an array of floats
-    for (let i = 0; i < raw_user_input.length; i++) {
-        raw_user_input = raw_user_input.replace(",", "");
-    }
     var numbers_as_strings = raw_user_input.split(separator_text);
     if (numbers_as_strings.length == 1) {
         number_sorter_output.innerHTML = "Only one number provided.";
