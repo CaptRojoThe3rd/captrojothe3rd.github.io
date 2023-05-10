@@ -52,12 +52,6 @@ body {
 	padding-top: 3px;
 	margin-top: -10px;
 }
-
-
-@font-face {
-	font-family: "Minecraftia";
-	src: url("https://captrojothe3rd.github.io/Minecraftia.ttf");
-}
 p {
     font-family: Roboto;
     color: #FFFFFF;
