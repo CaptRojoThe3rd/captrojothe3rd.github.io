@@ -116,9 +116,17 @@ function sort_and_calculate(calculate_data) {
         }
         // IQR
         var iqr = q3 - q1;
+        // Range
+        var range = numbers[numbers.length - 1] - numbers[0];
+        // Mean Absolute Deviation
+        var mean_absolute_deviation = 0;
+        for (let i = 0; i < numbers.length; ++i) {
+            mean_absolute_deviation += Math.abs(mean - numbers[i]);
+        }
+        mean_absolute_deviation /= numbers.length;
         // Results
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
-        var results = "Sorted Numbers: " + sorted_numbers_string + "<br />" + "Median: " + median.toString() + "<br />" + "Mean: " + mean.toString() + "<br />" + "Quartile 1: " + q1.toString() + "<br />" + "Quartile 3: " + q3.toString() + "<br />" + "IQR: " + iqr.toString();
+        var results = "Sorted Numbers: " + sorted_numbers_string + "<br />" + "Median: " + median.toString() + "<br />" + "Mean: " + mean.toString() + "<br />" + "Quartile 1: " + q1.toString() + "<br />" + "Quartile 3: " + q3.toString() + "<br />" + "IQR: " + iqr.toString() + "<br />" + "Range: " + range.toString() + "<br />" + "Mean Absolute Deviation: " + mean_absolute_deviation.toString();
         number_sorter_output.innerHTML = results;
     } else { // If the user doesn't want calculations do be done, just show the sorted numbers
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
