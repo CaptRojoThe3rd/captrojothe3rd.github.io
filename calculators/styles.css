@@ -1,0 +1,24 @@
+p {
+    font-family: Roboto;
+    color: #FFFFFF;
+}
+h1 {
+    font-family: Roboto;
+    color: #FFFFFF;
+    text-align: center;
+}
+.centered-buttons {
+    text-align: center;
+}
+#calc_1 {
+    float: left;
+}
+#calc_2 {
+    margin-left: 10px;
+    float: left;
+}
+.calcs {
+	margin: auto;
+    width: 50%;
+	height: 300px;
+}
