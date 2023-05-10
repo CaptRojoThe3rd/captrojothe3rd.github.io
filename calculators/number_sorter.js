@@ -1,6 +1,3 @@
-if (navigator.userAgent.indexOf("Chrome") != -1) {
-    document.getElementById("display").style.size = 22;
-}
 console.log("Number Sorter + Median, Mean, Quartile, & IQR Finder v3.0\n");
 // Rounding thing
 const roundOffTo = (num, factor = 1) => {
