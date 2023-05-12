@@ -60,13 +60,15 @@ h1 {
     text-align: center;
 }
 #calc_1 {
-    float: left;
+	margin: auto;
+	width: 50%;
 }
 #calc_2 {
-    margin-left: 10px;
-    float: left;
+    margin: auto;
+	width: 50%;
 }
 .calcs {
-    margin-left: 20px;
+    margin: auto;
+	width: 50%;
 	height: 300px;
 }

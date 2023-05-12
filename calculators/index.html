@@ -7,7 +7,7 @@
 <body>
 	<div class="top-area" style="height: 150px;">
 		<div class="title">
-			<p style="font-family: 'Minecraftia';">
+			<p>
 				The website of CaptRojoThe3rd
 			</p>
 		</div>
@@ -26,64 +26,68 @@
 			</div>
 		</div>
 	</div>
-	<div class="calcs">
-		<div style="float: left;">
-			<div id="calc_1">
-				<center>
-					<h1 style="line-height: 1%; font-size: 17px; font-family: Roboto;">
-						Calculator
-					</h1>
-				</center>
-				<script src="calculator.js"></script>
-				<input type="text" id="display" placeholder="" style="font-size:19.6px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF; text-align: right; height: 30px;" size="31" autocomplete="off" />
-				<br />
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="reset();">CE</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="clear_display();">C</button>
-				<button id="power" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="power();">^</button>
-				<button id="divide" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="divide();">÷</button>
-				<br />
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="seven();">7</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="eight();">8</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="nine();">9</button>
-				<button id="multiply" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="multiply();">*</button>
-				<br />
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="four();">4</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="five();">5</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="six();">6</button>
-				<button id="minus" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="minus();">-</button>
-				<br />
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="one();">1</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="two();">2</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="three();">3</button>
-				<button id="plus" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="plus();">+</button>
-				<br />
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="negative_positive();">-/+</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="zero();">0</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="dot();">.</button>
-				<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="equal();">=</button>
-				<br />
-			</div>
-		</div>
-		<div style="float: left; margin-left: 20px;">
-			<div id="calc_2">
-				<h1 style="font-family:Roboto; font-size: 17px; line-height:10%; color: #FFFFFF;">
-					Number Sorter + Median, Mean, Quartile, IQR, Range, & Deviation Finder
-				</h1>
-				<center>
-					<input type="text" placeholder="Enter numbers... (Ex: 5, 4, 2, 7, 1)" id="raw_user_input" style="font-size:20px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF;" size="35" />
-					<input type="text" placeholder="Separator..." id="separator" style="font-size:20px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF;" size="10" />
-				</center>
-				<br />
-				<div class="centered-buttons">
-					<button type="button" onclick="sort_and_calculate(false);" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Sort</button>
-					<button type="button" onclick="sort_and_calculate(true);" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Sort & Calculate</button>
-					<button type="button" onclick="reset_input();" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Reset</button>
-				</div>
-				<script src="number_sorter.js"></script>
-				<p style="font-size:18px; font-family:Roboto; color: #FFFFFF; text-align: left" id="number_sorter_output"></p>
-			</div>
-		</div>
+
+		
+
+	<center>
+			<h1 style="line-height: 1%; font-size: 17px; font-family: Roboto;">
+				Calculator
+			</h1>
+		
+		<script src="calculator.js"></script>
+		<input type="text" id="display" placeholder="" style="font-size:19.6px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF; text-align: right; height: 30px;" size="31" autocomplete="off" />
+		<br />
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="reset();">CE</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="clear_display();">C</button>
+		<button id="power" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="power();">^</button>
+		<button id="divide" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="divide();">÷</button>
+		<br />
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="seven();">7</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="eight();">8</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="nine();">9</button>
+		<button id="multiply" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="multiply();">*</button>
+		<br />
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="four();">4</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="five();">5</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="six();">6</button>
+		<button id="minus" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="minus();">-</button>
+		<br />
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="one();">1</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="two();">2</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="three();">3</button>
+		<button id="plus" style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="plus();">+</button>
+		<br />
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="negative_positive();">-/+</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="zero();">0</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="dot();">.</button>
+		<button style="font-family: Roboto; font-size: 20px; text-align: center; background-color: #3838a0; color: #FFFFFF; border-color: #454545; width: 75px; height: 40px; " onclick="equal();">=</button>
+		<br />
+	</center>
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<h1 style="font-family:Roboto; font-size: 17px; line-height:10%; color: #FFFFFF;">
+		Number Sorter + Median, Mean, Quartile, IQR, Range, & Deviation Finder
+	</h1>
+	<center>
+		<input type="text" placeholder="Enter numbers... (Ex: 5, 4, 2, 7, 1)" id="raw_user_input" style="font-size:20px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF;" size="35" />
+		<input type="text" placeholder="Separator..." id="separator" style="font-size:20px; background-color: #454545; border-color: #4f4f4f; color: #FFFFFF;" size="10" />
+	</center>
+	<br />
+	<div class="centered-buttons">
+		<button type="button" onclick="sort_and_calculate(false);" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Sort</button>
+		<button type="button" onclick="sort_and_calculate(true);" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Sort & Calculate</button>
+		<button type="button" onclick="reset_input();" style="font-size: 20px; background-color: #3838a0; color: #FFFFFF; border-color: #454545;">Reset</button>
 	</div>
+	<script src="number_sorter.js"></script>
+	<div style="margin: auto; width: 50%;" id="number_sorter_output_div">
+		<p style="font-size:18px; font-family:Roboto; color: #FFFFFF; text-align: left" id="number_sorter_output"></p>
+	</div>
+
+
 	<script>
 		if (navigator.userAgent.indexOf("Chrome") != -1) {
 			document.getElementById("display").size = 22;
