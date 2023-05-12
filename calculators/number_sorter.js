@@ -136,6 +136,13 @@ function sort_and_calculate(calculate_data) {
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
         var results = "Sorted Numbers: " + sorted_numbers_string + "<br />" + "Median: " + median.toString() + "<br />" + "Mean: " + mean.toString() + "<br />" + "Quartile 1: " + q1.toString() + "<br />" + "Quartile 3: " + q3.toString() + "<br />" + "IQR: " + iqr.toString() + "<br />" + "Range: " + range.toString() + "<br />" + "Mean Absolute Deviation: " + mean_absolute_deviation.toString() + "<br />" + "Standard Deviation: " + standard_deviation.toString();
         number_sorter_output.innerHTML = results;
+        // Adjust results div
+        var result_div_width = sorted_numbers_string.length / 2;
+        result_div_width = Math.floor(result_div_width);
+        if (result_div_width > 100) {
+            result_div_width = 100;
+        }
+        document.getElementById("number_sorter_output_div").style.width = result_div_width.toString() + "%";
     } else { // If the user doesn't want calculations do be done, just show the sorted numbers
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
         number_sorter_output.innerHTML = "Sorted Numbers:\n" + sorted_numbers_string;
