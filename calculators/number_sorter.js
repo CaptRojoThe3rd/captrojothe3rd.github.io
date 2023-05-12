@@ -131,7 +131,6 @@ function sort_and_calculate(calculate_data) {
         }
         standard_deviation /= numbers.length;
         standard_deviation = Math.sqrt(standard_deviation);
-        console.log(sorted_numbers_string.length);
         // Checksum
         var checksum = 0;
         for (i = 0; i < numbers.length; ++i) {
@@ -142,8 +141,11 @@ function sort_and_calculate(calculate_data) {
         var results = "Sorted Numbers: " + sorted_numbers_string + "<br />" + "Median: " + median.toString() + "<br />" + "Mean: " + mean.toString() + "<br />" + "Quartile 1: " + q1.toString() + "<br />" + "Quartile 3: " + q3.toString() + "<br />" + "IQR: " + iqr.toString() + "<br />" + "Range: " + range.toString() + "<br />" + "Mean Absolute Deviation: " + mean_absolute_deviation.toString() + "<br />" + "Standard Deviation: " + standard_deviation.toString() + "<br />" + "Checksum: " + checksum.toString();
         number_sorter_output.innerHTML = results;
         // Adjust results div
-        var result_div_width = sorted_numbers_string.length * 10;
-        result_div_width = Math.floor(result_div_width);
+        console.log(sorted_numbers_string.length);
+        var result_div_width = sorted_numbers_string.length * 11;
+        if (result_div_width < 400) {
+            result_div_width = 400;
+        }
         document.getElementById("number_sorter_output_div").style.width = result_div_width.toString() + "px";
     } else { // If the user doesn't want calculations do be done, just show the sorted numbers
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
