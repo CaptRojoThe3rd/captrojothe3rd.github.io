@@ -5,19 +5,19 @@
 	<script src="https://apis.google.com/js/platform.js"></script>
 </head>
 <body>
-	<div class="top-area">
+	<div class="top-area" style="height: 150px;">
 		<div class="title">
 			<p style="font-family: 'Minecraftia';">
 				The website of CaptRojoThe3rd
 			</p>
 		</div>
+		<div id="chrome-height-adjust" style="height: 0px;"></div>
 		<div class="subtitle-adjust">
 			<div class="normal-centered-text">
 				<p>
 					I'm not putting in effort to support Chrome + The website is still usable in Chrome stop complaining
 				</p>
 			</div>
-			<br />
 			<div style="width: 50%; margin: auto; margin-top: -20px;">
 				<center>
 					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io'">Home</button>
@@ -89,6 +89,7 @@
 			document.getElementById("display").size = 22;
 			document.getElementById("raw_user_input").size = 29;
 			document.getElementById("separator").size = 8;
+			document.getElementById("chrome-height-adjust").style.height = "20px";
 		}
 	</script>
 </body>

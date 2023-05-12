@@ -4,13 +4,13 @@
 	<script src="https://apis.google.com/js/platform.js"></script>
 </head>
 <body>
-	<div class="top-area">
+	<div class="top-area" style="height: 150px;">
 		<div class="title">
 			<p>
 				The website of CaptRojoThe3rd
 			</p>
 		</div>
-		<br />
+		<div id="chrome-height-adjust" style="height: 0px;"></div>
 		<div class="subtitle-adjust">
 			<div class="normal-centered-text">
 				<p>
@@ -31,4 +31,9 @@
 	<div class="yt-sub-button-centered">
 		<div class="g-ytsubscribe" data-channelid="UCeyEdoNTDMrvNIsUFQYMITg" data-layout="full" data-theme="dark" data-count="default"></div>
 	</div>
+	<script>
+		if (navigator.userAgent.indexOf("Chrome") != -1) {
+			document.getElementById("chrome-height-adjust").style.height = "20px";
+		}
+	</script>
 </body>
