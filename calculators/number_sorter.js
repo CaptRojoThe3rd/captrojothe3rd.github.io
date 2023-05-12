@@ -23,12 +23,14 @@ function sort_and_calculate(calculate_data) {
     // Show an error message if no numbers are provided
     if (raw_user_input == "") {
         number_sorter_output.innerHTML = "No numbers provided.";
+        document.getElementById("number_sorter_output_div").style.width = "200px";
         return;
     }
     // Convert user input into an array of floats
     var numbers_as_strings = raw_user_input.split(separator_text);
     if (numbers_as_strings.length == 1) {
         number_sorter_output.innerHTML = "Only one number provided.";
+        document.getElementById("number_sorter_output_div").style.width = "215px";
         return;
     }
     var numbers = []
@@ -141,7 +143,6 @@ function sort_and_calculate(calculate_data) {
         var results = "Sorted Numbers: " + sorted_numbers_string + "<br />" + "Median: " + median.toString() + "<br />" + "Mean: " + mean.toString() + "<br />" + "Quartile 1: " + q1.toString() + "<br />" + "Quartile 3: " + q3.toString() + "<br />" + "IQR: " + iqr.toString() + "<br />" + "Range: " + range.toString() + "<br />" + "Mean Absolute Deviation: " + mean_absolute_deviation.toString() + "<br />" + "Standard Deviation: " + standard_deviation.toString() + "<br />" + "Checksum: " + checksum.toString();
         number_sorter_output.innerHTML = results;
         // Adjust results div
-        console.log(sorted_numbers_string.length);
         var result_div_width = sorted_numbers_string.length * 11;
         if (result_div_width < 400) {
             result_div_width = 400;
@@ -150,5 +151,10 @@ function sort_and_calculate(calculate_data) {
     } else { // If the user doesn't want calculations do be done, just show the sorted numbers
         sorted_numbers_string = sorted_numbers_string.slice(0, sorted_numbers_string.length - 2);
         number_sorter_output.innerHTML = "Sorted Numbers:\n" + sorted_numbers_string;
+        var result_div_width = sorted_numbers_string.length * 11;
+        if (result_div_width < 400) {
+            result_div_width = 400;
+        }
+        document.getElementById("number_sorter_output_div").style.width = result_div_width.toString() + "px";
     }
 }
