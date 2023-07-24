@@ -8,7 +8,7 @@ body {
 	margin-left: -8px;
 	margin-top: -30px;
 	margin-right: -8px;
-	margin-bottom: 70px;
+	margin-bottom: 0px;
 	padding: 5px;
 }
 .title {
@@ -53,10 +53,13 @@ body {
 }
 
 .side-area {
-	background-color: #242c34;
+	background-color: #303040;
 	color: white;
 	width: 400px;
+	font-family: Verdana;
 }
+
+
 
 @font-face {
 	font-family: "Minecraftia";
