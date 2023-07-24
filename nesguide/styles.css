@@ -52,6 +52,11 @@ body {
 	margin-top: -10px;
 }
 
+.side-area {
+	background-color: #242c34;
+	color: white;
+	width: 400px;
+}
 
 @font-face {
 	font-family: "Minecraftia";
