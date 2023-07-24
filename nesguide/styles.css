@@ -57,8 +57,12 @@ body {
 	color: white;
 	width: 400px;
 	font-family: Verdana;
+	line-height: 24px;
 }
 
+a {
+	color: white;
+}
 
 
 @font-face {
