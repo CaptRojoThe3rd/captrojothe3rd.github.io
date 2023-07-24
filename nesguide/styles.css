@@ -1,6 +1,7 @@
-body {
+html, body {
 	background-color: #202830;
 	color: white;
+	height: 2000px;
 }
 
 .top-area {
@@ -58,6 +59,7 @@ body {
 	width: 400px;
 	font-family: Verdana;
 	line-height: 24px;
+	height: 1840px;
 }
 
 a {
