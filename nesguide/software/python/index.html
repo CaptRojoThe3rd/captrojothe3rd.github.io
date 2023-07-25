@@ -175,14 +175,27 @@
 
 	<div class="main-area">
 		<p>
-			This guide should help anyone wishing to write NES games.
+			Python is a useful programming language, and it is very useful for programming. 
 			<br>
-			It includes some documentation and example code for the 6502, the NES hardware, and some mappers for the NES.
-			<br>
-			It's not <i>exactly</i> a tutorial, but it should help with programming.
-			<br>
-			<br>
+			It can be downloaded here: <a href="https://www.python.org/downloads/" target="_blank">https://www.python.org/downloads/</a>
 		</p>
-		<img src="nes.jpg" alt="Picture of the NES" style="width: 600px; height: 418px;">
+		<img src="python_download.png" alt="Python download page" style="width: 597px; height: 403px;">
+		<br>
+		<br>
+		<p>
+			One simple script can give you the address for a nametable tile.
+		</p>
+		<img src="ntadr.png" alt="Nametable address calculation script" style="width: 556px; height: 268px;">
+		<br>
+		<br>
+		<p>
+			Nametable A: (0x2000|(((y)&#x3c;&#x3c;5)|(x)))
+			<br>
+			Nametable B: (0x2400|(((y)&#x3c;&#x3c;5)|(x)))
+			<br>
+			Nametable C: (0x2800|(((y)&#x3c;&#x3c;5)|(x)))
+			<br>
+			Nametable D: (0x2c00|(((y)&#x3c;&#x3c;5)|(x)))
+		</p>
 	</div>
 </body>

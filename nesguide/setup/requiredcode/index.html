@@ -175,14 +175,176 @@
 
 	<div class="main-area">
 		<p>
-			This guide should help anyone wishing to write NES games.
-			<br>
-			It includes some documentation and example code for the 6502, the NES hardware, and some mappers for the NES.
-			<br>
-			It's not <i>exactly</i> a tutorial, but it should help with programming.
+			There is some code that is required for an NES game.
 			<br>
 			<br>
+			First, create a file called "main.s"
 		</p>
-		<img src="nes.jpg" alt="Picture of the NES" style="width: 600px; height: 418px;">
+		<img src="createmain.png" alt="Create main.s">
+		<br>
+		<br>
+		<p>
+			Start by writing the following code:
+		</p>
+		<br>
+		<p class="code">
+			.segment "PRG"
+		</p>
+		<br>
+		<p class="code">
+			Reset:
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			jmp Reset
+		</p>
+		<p class="code">
+			NMI:
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			rti
+		</p>
+		<p class="code">
+			IRQ:
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			rti
+		</p>
+		<br>
+		<p class="code">
+			.segment "VECTORS"
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.word NMI
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.word Reset
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.word IRQ
+		</p>
+		<br>
+		<p>
+			Then, you need to create an iNES header. You should actually probably use NES 2.0, but both work.
+			<br>
+			An easy way to do this is to open any game in your emulator, and open the NES header editor.
+			<br>
+			This guide will use NROM, which doesn't have any special/fancy mappers.
+		</p>
+		<img src="headereditor.png" alt="Mesen NES Header Editor">
+		<br>
+		<br>
+		<p>
+			Next, you can add the header to "main.s"
+		</p>
+		<br>
+		<p class="code">
+			.segment "HEADER"
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.byte $4e, $45, $53, $1a
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.byte $02, $01, $01, $08
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.byte $00, $00, $00, $00
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.byte $00, $00, $00, $00
+		</p>
+		<br>
+		<br>
+		<p>
+			Next, you will need to create a layout file for the assembler.
+			<br>
+			Create a file called "layout.cfg"
+		</p>
+		<img src="createlayout.png" alt="Create layout.cfg">
+		<br>
+		<br>
+		<p>
+			The layout file tells the assembler where and how to put the assembled code and other data for your NES game.
+			<br>
+			A .NES file's data is stored in this order: iNES/NES 2.0 Header, PRG-ROM, CHR-ROM. Add this code to the "layout.cfg" file:
+		</p>
+		<br>
+		<p class="code">
+			MEMORY {
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			HEADER: start = $0, size = $10, file = %O, fill = yes;
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			PRG: start = $8000, size = $8000, file = %O, fill = yes;
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			CHR: start = $0000, size = $2000, file = %O, fill = yes;
+		</p>
+		<p class="code">
+			}
+			<br>
+			<br>
+			SEGMENTS {
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			HEADER: load = HEADER, type = ro;
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			PRG: load = PRG, type = ro;
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			VECTORS: load = PRG, type = ro, start = $fffa;
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			CHR: load = CHR, type = ro, optional = yes;
+		</p>
+		<p class="code">
+			}
+		</p>
+		<br>
+		<br>
+		<p>
+			Finally, we can create "compile.bat" - running this will build your NES game.
+			<br>
+			Create a file called "compile.bat"
+		</p>
+		<img src="createcompilebuild.png" alt="Create compile.bat and build\">
+		<br>
+		<br>
+		<p>
+			Next, you can add the following code to "compile.bat"
+		</p>
+		<br>
+		<p class="code">
+			@echo off
+			<br>
+			<br>
+			set name="ExampleNESGame"
+			<br>
+			<br>
+			set path=%path%;..\bin\
+			<br>
+			set CC65_HOME=..\
+			<br>
+			<br>
+			c:\cc65\bin\ca65 main.s --cpu 6502x
+			<br>
+			c:\cc65\bin\ld65 -C layout.cfg -o "%name%.nes" main.o
+			<br>
+			<br>
+			del *.o
+			<br>
+			<br>
+			%name%.nes
+		</p>
+		<br>
+		<br>
+		<p>
+			This script will not only assemble your game, but it will also automatically run it. You can run this file it should create a .NES file and open it.
+			<br>
+			<br>
+			When the file runs, the emulator should open, and the game will do nothing, repeatedly jumping execution to $8000, with a solid color on the screen.
+		</p>
+		<img src="functionalgame.png" alt="The game is functional" style="width: 959px; height: 512px;">
 	</div>
 </body>

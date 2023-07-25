@@ -175,14 +175,28 @@
 
 	<div class="main-area">
 		<p>
-			This guide should help anyone wishing to write NES games.
+			YYCHR is a program for editing CHR-ROM data.
 			<br>
-			It includes some documentation and example code for the 6502, the NES hardware, and some mappers for the NES.
-			<br>
-			It's not <i>exactly</i> a tutorial, but it should help with programming.
-			<br>
-			<br>
+			It can be downloaded here: <a href="https://w.atwiki.jp/yychr/sp/" target="_blank">https://w.atwiki.jp/yychr/sp/</a>
 		</p>
-		<img src="nes.jpg" alt="Picture of the NES" style="width: 600px; height: 418px;">
+		<img src="yychr_webpage.png" alt="YYCHR webpage" style="width: 678px; height: 330px;">
+		<br>
+		<br>
+		<p>
+			When started, YYCHR will look like the following. You can create a new CHR-ROM by clicking the "New" button. Note that it will create a 16KB CHR-ROM, double 
+			the size of the NES's 8KB window.
+		</p>
+		<img src="yychr_default.png" alt="YYCHR default" style="width: 588px; height: 397px;">
+		<br>
+		<br>
+		<p>
+			If you want to create a smaller or larger CHR-ROM, you can use a hex editor (<a href="/nesguide/software/hex">1.5 - Hex Editor</a>). The NES's 8KB window
+			is 0x2000 in size, or 0x0000-0x1fff.
+			<br>
+			<br>
+			You can also create pixel art in another program if you'd like; I would recommend Piskel if you do (<a href="https://www.piskelapp.com/" target="_blank">https://www.piskelapp.com/</a>).
+			To copy the image data to YYCHR, you can just copy the pixels themselves (for Windows: just open the image, right click it, and copy) and paste them into YYCHR. The program
+			has a BMP bitmap section that is useful for this.
+		</p>
 	</div>
 </body>

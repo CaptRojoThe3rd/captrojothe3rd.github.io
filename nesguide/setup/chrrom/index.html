@@ -175,14 +175,28 @@
 
 	<div class="main-area">
 		<p>
-			This guide should help anyone wishing to write NES games.
+			If you are planning to add graphics to your game - which you probably want to do - you can create and include a .CHR file for the assembler to include in the .NES file.
 			<br>
-			It includes some documentation and example code for the 6502, the NES hardware, and some mappers for the NES.
-			<br>
-			It's not <i>exactly</i> a tutorial, but it should help with programming.
-			<br>
-			<br>
+			First, you can create an empty .CHR file.
 		</p>
-		<img src="nes.jpg" alt="Picture of the NES" style="width: 600px; height: 418px;">
+		<img src="createchr.png" alt="Create graphics.chr">
+		<br>
+		<br>
+		<p>
+			Next, close the .CHR file in VSCode, and open it in a hex editor. The file needs to be 8KB (0x2000) in size, so fill it with zeros between 0x0000 and 0x1fff.
+		</p>
+		<img src="chrhex.png" alt="Add data to CHR file" style="width: 515px; height: 421px;">
+		<br>
+		<br>
+		<p>
+			Finally, add the following code to "main.s" - the file with all of your code in it.
+		</p>
+		<br>
+		<p class="code">
+			.segment "CHR"
+		</p>
+		<p class="code" style="text-indent: 56px;">
+			.incbin "graphics.chr"
+		</p>
 	</div>
 </body>
