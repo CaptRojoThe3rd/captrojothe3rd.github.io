@@ -60,6 +60,16 @@ html, body {
 	font-family: Verdana;
 	line-height: 24px;
 	height: 1840px;
+	float: left;
+}
+
+.main-area {
+	font-family: Verdana;
+	line-height: 24px;
+	font-size: 14px;
+	margin-left: 480px;
+	margin-top: 80px;
+	margin-right: 280px;
 }
 
 a {
