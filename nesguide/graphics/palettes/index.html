@@ -180,12 +180,18 @@
 			Colors are 1 byte in size, but only use 6 bits ($00-$3f). A handful of colors are all black.
 		</p>
 		<img src="nes-color-palette2.png" alt="NES Color Palette">
+		<img src="yychr-palette.png" alt="YYCHR's NES Palette" style="width: 613px; height: 109px;">
 		<br>
 		<br>
 		<p>
 			Warning: There is also an issue with color $0d - because it is "darker than black", it can cause issues with some TVs, from anything between slight distortions 
-			to total loss of picture.
+			to total loss of picture. This video demonstrates an NES game that uses this color causing issues on certain TVs.
 		</p>
 		<iframe width="430" height="240" src="https://www.youtube.com/embed/3fhyX3HdVcg"></iframe>
+		<br>
+		<br>
+		<p>
+			To avoid any issues use $0f for black and $30 for white. Most NES games use these color indexes for white and black.
+		</p>
 	</div>
 </body>
