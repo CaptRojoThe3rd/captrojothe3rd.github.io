@@ -175,7 +175,17 @@
 
 	<div class="main-area">
 		<p>
-			
+			Palettes on the NES are stored in the PPU's memory at $3f00-$3f1f. There are 4 background palettes ($3f00-$3f0f) and 4 sprite palettes ($3f10-$3f1f).
+			<br>
+			Colors are 1 byte in size, but only use 6 bits ($00-$3f). A handful of colors are all black.
 		</p>
+		<img src="nes-color-palette2.png" alt="NES Color Palette">
+		<br>
+		<br>
+		<p>
+			Warning: There is also an issue with color $0d - because it is "darker than black", it can cause issues with some TVs, from anything between slight distortions 
+			to total loss of picture.
+		</p>
+		<iframe width="430" height="240" src="https://www.youtube.com/watch?v=3fhyX3HdVcg"></iframe>
 	</div>
 </body>
