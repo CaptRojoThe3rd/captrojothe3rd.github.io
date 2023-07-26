@@ -175,22 +175,102 @@
 
 	<div class="main-area">
 		<p>
-			An NES emulator allows you to play NES games on your PC, rather than on a console. If you don't want to use an NES emulator, you will need a way to write your game to
-			a cartridge every time you want to test it. So, an emulator is probably a good idea.
-			<br>
-			<br>
-			In my opinion, the best NES emulator (at least for development) is Mesen. It has many development tools, such as a Memory Viewer, Tile/Sprite/Palette Viewers, and
-			a full 6502 debugger.
-			<br>
-			<br>
-			It can be downloaded here: <a href="https://mesen.ca/" target="_blank">https://mesen.ca/</a>
+			The NES has 2KB of video memory or VRAM - enough for 2 nametables, or 2 screens. This is how a majority of NES game graphics is displayed. The NES outputs
+			a resolution of 256x240, or 32x30 tiles, for a total of 960 tiles. Each tile is 1 byte, and the remaining bytes for each nametable is used to select palettes.
 		</p>
-		<img src="mesen_download.png" alt="Mesen download page" style="width: 290px; height: 312px;">
+		<img src="memoryviewer.png" alt="Memory viewer showing nametable" style="width: 528px; height: 352px;">
+		<p>
+			Unfortunately, because of the amount of memory allocated for attributes, while tiles are 8x8, attribute areas are 16x16. The following image shows the tile
+			grid (blue) compares to the attribute grid (red). Many NES games used 16x16 meta-tiles to make things easier.
+		</p>
+		<img src="smb1grids.png" alt="Picture of tile and attribute grids over Super Mario Bros.">
 		<br>
 		<br>
 		<p>
-			Once Mesen is downloaded, .NES files can be opened with it. Many NES game ROMs can be found with a quick Google search.
+			Attribute bytes actually have control over 4 attribute areas (so, a 32x32 area). Some games use larger 32x32 meta-tiles to make things easier.
 		</p>
-		<img src="smb3.png" alt="Mesen emulating SMB3" style="width: 584px; height: 505px;">
+		<br>
+		<p>
+			Tile and attribute data can be uploaded to the PPU via $2006 (PPU Address) and $2007 (PPU Data).
+			<br>
+			The following code clears VRAM and displays "Hello, World" in the top-left corner. (This assumes the CHR-ROM has text in the correct positions.)
+		</p>
+		<br>
+		<p class="code">
+			HelloWorld:
+		</p>
+		<p class="code" style="margin-left: 86px;">
+			.byte "Hello, World!"
+		</p>
+		<p class="code">
+			<br>
+			; Clear VRAM
+			<br>
+			lda #$20
+			<br>
+			sta PpuAddr_2006
+			<br>
+			lda #0
+			<br>
+			sta PpuAddr_2006
+			<br>
+			tax
+			<br>
+			ldy #$10
+			<br>
+			:
+		</p>
+		<p class="code" style="margin-left: 86px;">
+			sta PpuData_2007
+			<br>
+			inx
+			<br>
+			bne :-
+			<br>
+			dey
+			<br>
+			bpl :-
+			<br>
+			<br>
+		</p>
+		<p class="code">
+			; Write "Hello, World!" in the top-left corner, offset 1 tile on both axis
+			<br>
+			lda #$20
+			<br>
+			sta PpuAddr_2006
+			<br>
+			lda #$21
+			<br>
+			sta PpuAddr_2006
+			<br>
+			:
+		</p>
+		<p class="code" style="margin-left: 86px;">
+			lda HelloWorld,x
+			<br>
+			sta PpuData_2007
+			<br>
+			inx
+			<br>
+			cpx #12
+			<br>
+			bne :-
+			<br>
+			<br>
+		</p>
+		<p class="code">
+			; Enable rendering
+			<br>
+			lda #%00011110
+			<br>
+			sta PpuMask_2001
+		</p>
+		<br>
+		<br>
+		<p>
+			The result:
+		</p>
+		<img src="helloworld.png" alt="Hello, World!" style="width: 587px; height: 505px;">
 	</div>
 </body>

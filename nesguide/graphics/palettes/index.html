@@ -6,7 +6,7 @@
 	<div class="top-area" style="height: 150px;">
 		<div class="title">
 			<p>
-				The website of CaptRojoThe3rd
+				captrojothe3rd.github.io
 			</p>
 		</div>
 		<div id="chrome-height-adjust" style="height: 0px;"></div>
@@ -176,12 +176,38 @@
 	<div class="main-area">
 		<p>
 			Palettes on the NES are stored in the PPU's memory at $3f00-$3f1f. There are 4 background palettes ($3f00-$3f0f) and 4 sprite palettes ($3f10-$3f1f).
-			<br>
-			Colors are 1 byte in size, but only use 6 bits ($00-$3f). A handful of colors are all black.
+			Colors are 1 byte in size, but only use 6 bits ($00-$3f). A handful of colors are all black. 
 		</p>
 		<img src="nes-color-palette2.png" alt="NES Color Palette">
 		<img src="yychr-palette.png" alt="YYCHR's NES Palette" style="width: 613px; height: 109px;">
 		<br>
+		<br>
+		<p>
+			While the RAM for palettes contains bytes for all 4 colors, the first color of background palette 0 and sprite palette 0 do anything. The first background color
+			is the background color for all palettes, and the first color of all sprite palettes isn't used because of sprite transparency. The first sprite color overwrites
+			the background color for all palettes.
+			<br>
+			The following shows how palettes are organized. Key: x = Unused; 00-1f = Used Palette Index; o = Overwrites Corresponding Background Palette Index
+		</p>
+		<br>
+		<p class="code">
+			00 01 02 03
+			<br>
+			xx 05 06 07
+			<br>
+			xx 09 0a 0b
+			<br>
+			xx 0d 0e 0f
+			<br>
+			<br>
+			oo 11 12 13
+			<br>
+			xx 15 16 17
+			<br>
+			xx 19 1a 1b
+			<br>
+			xx 1d 1e 1f
+		</p>
 		<br>
 		<p>
 			Warning: There is also an issue with color $0d - because it is "darker than black", it can cause issues with some TVs, from anything between slight distortions 
@@ -192,6 +218,38 @@
 		<br>
 		<p>
 			To avoid any issues, use $0f for black and $30 for white. Most NES games use these color indexes for white and black.
+		</p>
+		<br>
+		<p>
+			I would recommend that you keep a copy of palette data in work RAM accessible to the CPU, and copying it into palette RAM during vBlank/NMI. This can make it
+			easier to modify the palettes your game will use.
+		</p>
+		<br>
+		<p>
+			The following code will copy a palette in memory to the PPU's palette RAM.
+		</p>
+		<br>
+		<p class="code">
+			ldx #$3f
+			<br>
+			stx PpuAddr_2006
+			<br>
+			ldx #0
+			<br>
+			stx PpuAddr_2006
+			<br>
+			:
+		</p>
+		<p class="code" style="margin-left: 86px;">
+			lda Palette,x
+			<br>
+			sta PpuData_2007
+			<br>
+			inx
+			<br>
+			cpx #32
+			<br>
+			bne :-
 		</p>
 	</div>
 </body>
