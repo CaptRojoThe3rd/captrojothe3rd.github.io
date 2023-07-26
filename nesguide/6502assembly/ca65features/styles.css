@@ -1,0 +1,91 @@
+html, body {
+	background-color: #202830;
+	color: white;
+}
+
+.top-area {
+	background-color: #303850;
+	margin-left: -8px;
+	margin-top: -30px;
+	margin-right: -8px;
+	margin-bottom: 0px;
+	padding: 5px;
+}
+.title {
+	font-family: "Minecraftia";
+	font-size: 30px;
+	text-align: center;
+	margin: auto;
+	width: 50%;
+}
+.normal-centered-text {
+	font-family: Arial;
+	margin: auto;
+	width: 50%;
+	text-align: center;
+	font-size: 14px;
+	margin-top: -50px;
+	margin-bottom: 50px;
+}
+.minecraftia-centered-text {
+	font-family: "Minecraftia";
+	font-size: 15px;
+	text-align: center;
+	margin: auto;
+	width: 50%;
+}
+.yt-sub-button-centered {
+	margin: auto;
+	width: 166px;
+}
+.subtitle-adjust {
+	margin-top: -20px;
+}
+.top-area-button {
+	background-color: #505080;
+	color: #ffffff;
+	border-color: #90909f;
+	width: 150px;
+	height: 30px;
+	font-family: "Minecraftia";
+	padding-top: 3px;
+	margin-top: -10px;
+}
+
+.side-area {
+	background-color: #303040;
+	color: white;
+	width: 400px;
+	font-family: Verdana;
+	line-height: 24px;
+	height: 1350px;
+	float: left;
+}
+
+.main-area {
+	font-family: Verdana;
+	line-height: 24px;
+	font-size: 14px;
+	margin-left: 480px;
+	margin-top: 80px;
+	margin-right: 280px;
+}
+
+.code {
+	font-family: monospace;
+	line-height: 20px;
+	font-size: 12px;
+	margin-left: 30px;
+	margin-right: 280px;
+	margin-top: -5px;
+}
+
+a {
+	color: white;
+}
+
+
+@font-face {
+	font-family: "Minecraftia";
+	src: url("https://captrojothe3rd.github.io/Minecraftia.ttf");
+}
