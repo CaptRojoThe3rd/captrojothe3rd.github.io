@@ -175,113 +175,202 @@
 
 	<div class="main-area">
 		<p>
-			The NES has 2KB of video memory or VRAM - enough for 2 nametables, or 2 screens. This is how a majority of NES game graphics is displayed. The NES outputs
-			a resolution of 256x240, or 32x30 tiles, for a total of 960 tiles. Each tile is 1 byte, and the remaining bytes for each nametable is used to select palettes.
-			These remaining bytes are usually refered to as attributes.
-		</p>
-		<img src="memoryviewer.png" alt="Memory viewer showing nametable" style="width: 528px; height: 352px;">
-		<p>
-			Unfortunately, because of the amount of memory allocated for attributes, while tiles are 8x8, attribute areas are 16x16. The following image shows the tile
-			grid (blue) compares to the attribute grid (red). Many NES games used 16x16 meta-tiles to make things easier.
-		</p>
-		<img src="smb1grids.png" alt="Picture of tile and attribute grids over Super Mario Bros.">
-		<br>
-		<br>
-		<p>
-			Attribute bytes actually have control over 4 attribute areas (so, a 32x32 area). Some games use larger 32x32 meta-tiles to make things easier.
+			Now, while a game that doesn't scroll or move from a single screen is perfectly acceptable, certain kinds of games need scrolling. 
 			<br>
-			This example shows how an attribute byte is used with an SMB1 pipe:
-		</p>
-		<img src="nes-palette-stuff.png" alt="Showing how an attribute byte is used" style="width: 320px; height: 380px;">
-		<br>
-		<br>
-		<p>
-			Tile and attribute data can be uploaded to the PPU via $2006 (PPU Address) and $2007 (PPU Data).
 			<br>
-			The following code clears VRAM and displays "Hello, World" in the top-left corner. (This assumes the CHR-ROM has text in the correct positions.)
+			Well, you can't just rewrite an entire nametable in one frame. Since it needs to be in vBlank to prevent graphical glitches, there simply isn't enough time
+			in a frame, let alone a single vBlank interval.
+			<br>
+			<br>
+			So what's the solution? Well, the PPU has a scrolling feature. The PPU Scroll Register, at $2005 (Mesen label: PpuScroll_2005), can scroll the screen without
+			needing any writes to VRAM.
+			<br>
+			The PPU Scroll ($2005) register needs to be written to twice: The first write is the X Scroll value, and the second write is the Y Scroll value.
 		</p>
 		<br>
 		<p class="code">
-			HelloWorld:
+			lda XScroll
+			<br>
+			sta PpuScroll_2005
+			<br>
+			lda YScroll
+			<br>
+			sta PpuScroll_2005
 		</p>
-		<p class="code" style="margin-left: 86px;">
-			.byte "Hello, World!"
+		<br>
+		<br>
+		<p>
+			By incrementing X and Y scroll once per frame, we get this result:
 		</p>
+		<img src="scroll1.gif" alt="Scrolling with just $2005">
+		<br>
+		<br>
+		<p>
+			However, with just the PPU Scroll ($2005) register, there is a problem: when reaching the edge of the screen, the scroll value rolls back to 0 and the screen snaps
+			back to the first nametable.
+			<br>
+			<br>
+			However, there is a solution. In the PPU Control ($2000) register, there are two bits for the base nametable (basically, the nametable to snap back to, even though
+			it doesn't look to be snapping back to any nametable).
+			<br>
+			<br>
+			To implement this fix, we can add another variable, NTScroll. Then, as the X or Y scroll rolls over, we can invert the approprate bit. (Since there are 4 nametables
+			in a grid, you can invert bit 0 when the X scroll rolls over, and you can invert bit 1 when the Y scroll rolls over.) Then, we can OR it into the PPU Control register
+			(before the writes to $2005).
+		</p>
+		<br>
 		<p class="code">
+			inc XScroll
 			<br>
-			; Clear VRAM
+			bne :+
 			<br>
-			lda #$20
+			lda NTScroll
 			<br>
-			sta PpuAddr_2006
+			eor #$01
+			<br>
+			sta NTScroll
+			<br>
+			:
+			<br>
+			<br>
+			inc YScroll
+			<br>
+			bne :+
+			<br>
+			lda NTScroll
+			<br>
+			eor #$02
+			<br>
+			sta NTScroll
+			<br>
+			:
+			<br>
+			<br>
+			lda #%10001000
+			<br>
+			ora NTScroll
+			<br>
+			sta PpuControl_2000
+		</p>
+		<br>
+		<br>
+		<p>
+			Here is the result of this code:
+		</p>
+		<img src="scroll2.gif" alt="Scrolling with $2005 and $2000">
+		<br>
+		<br>
+		<p>
+			However, there is still one problem. Since screens are 256x240 pixels, Y scrolls 240-255 don't work, and simply act as a scroll value of 0. However, 
+			the fix is simple: you can just add
+			<a style="font-family: monospace; margin-left: 10px; margin-right: 10px;">lda YScroll</a>,
+			<a style="font-family: monospace; margin-left: 10px; margin-right: 10px;">cmp #240</a> before the branch, change the branch to
+			<a style="font-family: monospace; margin-left: 10px; margin-right: 10px;">bcs</a>, and add 
+			<a style="font-family: monospace; margin-left: 10px; margin-right: 10px;">lda #0</a>,
+			<a style="font-family: monospace; margin-left: 10px; margin-right: 10px;">sta YScroll</a> with the bit inverting code to reset the Y scroll to 0.
+		</p>
+		<br>
+		<p class="code">
+			inc YScroll
+			<br>
+			lda YScroll
+			<br>
+			cmp #240
+			<br>
+			bcc :+
+			<br>
+			lda NTScroll
+			<br>
+			eor #$02
+			<br>
+			sta NTScroll
 			<br>
 			lda #0
 			<br>
-			sta PpuAddr_2006
-			<br>
-			tax
-			<br>
-			ldy #$10
+			sta YScroll
 			<br>
 			:
 		</p>
-		<p class="code" style="margin-left: 86px;">
-			sta PpuData_2007
-			<br>
-			inx
-			<br>
-			bne :-
-			<br>
-			dey
-			<br>
-			bpl :-
-			<br>
-			<br>
+		<br>
+		<br>
+		<img src="scroll3.gif" alt="Scrolling with $2005, $2000, and adjusted Y scrolling">
+		<br>
+		<br>
+		<p>
+			However, this code only works for incrementing the scroll by one. However, these subroutines work for greater values, both with adding and subtracting:
 		</p>
+		<br>
 		<p class="code">
-			; Write "Hello, World!" in the top-left corner, offset 1 tile on both axis
-			<br>
-			lda #$20
-			<br>
-			sta PpuAddr_2006
-			<br>
-			lda #$21
-			<br>
-			sta PpuAddr_2006
-			<br>
-			:
+			AddScrollY:
 		</p>
 		<p class="code" style="margin-left: 86px;">
-			lda HelloWorld,x
+			clc
 			<br>
-			sta PpuData_2007
+			adc YScroll
 			<br>
-			inx
+			bcs @Adjust
 			<br>
-			cpx #12
+			cmp #$f0
 			<br>
-			bne :-
+			bcs @Adjust
 			<br>
+			sta YScroll
 			<br>
+			rts
+			<br>
+			@Adjust:
 		</p>
+		<p class="code" style="margin-left: 142px;">
+			adc #15
+			<br>
+			sta YScroll
+			<br>
+			lda NTScroll
+			<br>
+			eor #$02
+			<br>
+			sta NTScroll
+			<br>
+			rts
+		</p>
+		<br>
 		<p class="code">
-			; Enable rendering
+			SubtractScrollY: &nbsp; ; Note that this requires a temp value in RAM
+		</p>
+		<p class="code" style="margin-left: 86px;">
+			sta Temp
 			<br>
-			lda #%00011110
+			lda YScroll
 			<br>
-			sta PpuMask_2001
+			sec
+			<br>
+			sbc Temp
+			<br>
+			bcc @Adjust
+			<br>
+			sta YScroll
+			<br>
+			rts
+			<br>
+			@Adjust:
+		</p>
+		<p class="code" style="margin-left: 142px;">
+			sbc #15
+			<br>
+			sta YScroll
+			<br>
+			lda NTScroll
+			<br>
+			eor #$02
+			<br>
+			sta NTScroll
+			<br>
+			rts
 		</p>
 		<br>
 		<br>
 		<p>
-			The result:
-		</p>
-		<img src="helloworld.png" alt="Hello, World!" style="width: 587px; height: 505px;">
-		<br>
-		<br>
-		<p>
-			If you haven't already realized, tile IDs are just indexes into CHR-ROM. One byte means a total of 256 tiles, or one table. If you want to use more than 256 background
-			tiles, you will need to use a mapper (<a href="/nesguide/mappers">8 - Mappers</a>).
+			These subroutines will add/subtract from the Y scroll, and then adjust if the scroll value is in or passed the 240-255 range.
 		</p>
 	</div>
 </body>

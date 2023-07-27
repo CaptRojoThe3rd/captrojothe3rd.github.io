@@ -175,113 +175,145 @@
 
 	<div class="main-area">
 		<p>
-			The NES has 2KB of video memory or VRAM - enough for 2 nametables, or 2 screens. This is how a majority of NES game graphics is displayed. The NES outputs
-			a resolution of 256x240, or 32x30 tiles, for a total of 960 tiles. Each tile is 1 byte, and the remaining bytes for each nametable is used to select palettes.
-			These remaining bytes are usually refered to as attributes.
-		</p>
-		<img src="memoryviewer.png" alt="Memory viewer showing nametable" style="width: 528px; height: 352px;">
-		<p>
-			Unfortunately, because of the amount of memory allocated for attributes, while tiles are 8x8, attribute areas are 16x16. The following image shows the tile
-			grid (blue) compares to the attribute grid (red). Many NES games used 16x16 meta-tiles to make things easier.
-		</p>
-		<img src="smb1grids.png" alt="Picture of tile and attribute grids over Super Mario Bros.">
-		<br>
-		<br>
-		<p>
-			Attribute bytes actually have control over 4 attribute areas (so, a 32x32 area). Some games use larger 32x32 meta-tiles to make things easier.
+			Now, with only background tiles, moving something across the screen isn't that easy. You could only move 8 pixels at a time, and attributes would be an issue.
+			With sprites, this becomes much easier.
 			<br>
-			This example shows how an attribute byte is used with an SMB1 pipe:
+			The NES has OAM RAM for 64 sprites. OAM means Object Attribute Memory, and sprites are technically referred to as objects. This guide will refer to them as sprites,
+			though. 
 		</p>
-		<img src="nes-palette-stuff.png" alt="Showing how an attribute byte is used" style="width: 320px; height: 380px;">
+		<img src="smb3-only-sprites.png" alt="Super Mario Bros. 3 with only sprites displayed" style="width: 583px; height: 478px;">
 		<br>
 		<br>
 		<p>
-			Tile and attribute data can be uploaded to the PPU via $2006 (PPU Address) and $2007 (PPU Data).
+			Despite the capacity for 64 sprites, the NES can only display 8 sprites per scanline. If there are more sprites, the extra sprites won't render. Sprites earlier in
+			OAM RAM have priority over sprites later in OAM RAM, and this affects both sprites on top of each other as well as more than 8 sprites per scanline. 
+		</p>
+		<img src="smb3gif.gif" alt="GIF showing sprite overflow" style="width: 640px; height: 360px;">
+		<br>
+		<br>
+		<p>
+			If you keep running into the issue of sprite overflow, you can use a flickering effect, such as the one in the image above.
+		</p>
+		<br>
+		<p>
+			Unlike background tiles, sprites can be either 8x8 or 8x16 pixels in size, toggled by a bit in PPU Control ($2000). When in 8x8 mode, indexing works the same as 
+			background tiles. In 8x16 mode, sprites can access both CHR-ROM tables ($0000 and $1000) based on whether the tile index is even or odd.
 			<br>
-			The following code clears VRAM and displays "Hello, World" in the top-left corner. (This assumes the CHR-ROM has text in the correct positions.)
+			These are the tiles each sprite index would access:
+		</p>
+		<img src="8x16sprtable0.png" alt="Table 0" style="width: 385px; height: 384px;">
+		<img src="8x16sprtable1.png" alt="Table 1" style="width: 384px; height: 385px;">
+		<br>
+		<br>
+		<p>
+			And here is one of Super Mario Bros. 3's CHR-ROM tables, not arranged and arranged for 8x16 tiles:
+		</p>
+		<img src="smb3tiles.png" alt="Some of Super Mario Bros. 3's tiles" style="width: 385px; height: 385px;">
+		<img src="smb3tilesarranged.png" alt="SMB3's tiles arranged for 8x16 sprites" style="width: 385px; height: 385px;">
+		<br>
+		<br>
+		<p>
+			The sprite mode is determined by bit 5 (bit "H" below) in PPU Control ($2000).
 		</p>
 		<br>
 		<p class="code">
-			HelloWorld:
+			$2000: PPU Control
+		</p>
+		<p class="code" style="margin-left: 86px; margin-right: 0">
+			VPHB SINN
+			<br>
+			|||| ||++-- Base nametable address (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2c00)
+			<br>
+			|||| |+---- VRAM address increment per CPU read/write of PPU Data (0: add 1, going across; 1: add 32, going down)
+			<br>
+			|||| +----- Sprite pattern table address for 8x8 sprites (0: $0000; 1: $1000)
+			<br>
+			|||+------- Background pattern table address (0: $1000; 1: $1000)
+			<br>
+			||+-------- <strong style="font-size: 13px;">Sprite size (0: 8x8; 1: 8x16)</strong>
+			<br>
+			|+--------- PPU master/slave select (0: read backdrop from EXT pins; 1: output color on EXT pins)
+			<br>
+			+---------- Generate an NMI at the start of the vertical blanking interval (0: off; 1: on)
+		</p>
+		<br>
+		<br>
+		<p>
+			While a background tile uses 1 byte, a sprite uses 4 bytes.
+			<br>
+			Byte 1: Y Position
+			<br>
+			Byte 2: Tile Index
+			<br>
+			Byte 3: Attributes
+			<br>
+			Byte 4: X Position
+			<br>
+			<br>
+			The Y Position, Tile Index, and X Position bytes are self-explanatory. The attribute byte contains more than just the palette, and below is a description of it.
+		</p>
+		<br>
+		<p class="code">
+			Sprite Attribute Byte
 		</p>
 		<p class="code" style="margin-left: 86px;">
-			.byte "Hello, World!"
+			VHB---PP
+			<br>
+			|||&nbsp;&nbsp;&nbsp;++-- Palette index
+			<br>
+			||+------- Background Priorty (0: render on top of background, 1: render behind background)
+			<br>
+			|+-------- Horizontal Flip
+			<br>
+			+--------- Vertical Flip
 		</p>
+		<br>
+		<br>
+		<p>
+			To add a sprite to OAM RAM, you can use the OAM Address ($2003) and OAM Data ($2004) registers. This bit of code writes a single sprite to the screen near the top
+			left corner, below the "Hello, World!" written with background tiles. WARNING: Sprite code needs to be written during vBlank / NMI, since OAM RAM can decay after
+			a vBlank without writes.
+		</p>
+		<br>
 		<p class="code">
+			lda #0
 			<br>
-			; Clear VRAM
+			sta OamAddr_2003
 			<br>
-			lda #$20
 			<br>
-			sta PpuAddr_2006
+			lda #24
+			<br>
+			sta OamData_2004
 			<br>
 			lda #0
 			<br>
-			sta PpuAddr_2006
+			sta OamData_2004
 			<br>
-			tax
+			sta OamData_2004
 			<br>
-			ldy #$10
+			lda #8
 			<br>
-			:
-		</p>
-		<p class="code" style="margin-left: 86px;">
-			sta PpuData_2007
-			<br>
-			inx
-			<br>
-			bne :-
-			<br>
-			dey
-			<br>
-			bpl :-
-			<br>
+			sta OamData_2004
 			<br>
 		</p>
-		<p class="code">
-			; Write "Hello, World!" in the top-left corner, offset 1 tile on both axis
-			<br>
-			lda #$20
-			<br>
-			sta PpuAddr_2006
-			<br>
-			lda #$21
-			<br>
-			sta PpuAddr_2006
-			<br>
-			:
-		</p>
-		<p class="code" style="margin-left: 86px;">
-			lda HelloWorld,x
-			<br>
-			sta PpuData_2007
-			<br>
-			inx
-			<br>
-			cpx #12
-			<br>
-			bne :-
-			<br>
-			<br>
-		</p>
-		<p class="code">
-			; Enable rendering
-			<br>
-			lda #%00011110
-			<br>
-			sta PpuMask_2001
-		</p>
+		<br>
+		<img src="spritebelowhelloworld.png" alt="Sprite below 'Hello, World!' text" style="width: 587px; height: 508px;">
 		<br>
 		<br>
 		<p>
-			The result:
+			To disable/hide a sprite, you can simply set the Y position to be greater than 240. Since this is in vBlank, they won't render.
 		</p>
-		<img src="helloworld.png" alt="Hello, World!" style="width: 587px; height: 505px;">
-		<br>
 		<br>
 		<p>
-			If you haven't already realized, tile IDs are just indexes into CHR-ROM. One byte means a total of 256 tiles, or one table. If you want to use more than 256 background
-			tiles, you will need to use a mapper (<a href="/nesguide/mappers">8 - Mappers</a>).
+			You may have noticed that in the first image, there are solid rectangle sprites below the Piranha Plant. You might have wondered what this was for.
+			<br>
+			Here's the explanation: To hide the Piranha Plant behind the pipe when it is moving up or down, it is covered by a higher-priorty sprite (earlier in
+			OAM RAM) that has the Background Priorty bit set, so that it renders behind the pipe. Since the Background Priorty sprite has priority, it covers the
+			Piranha Plant's sprites as they go inside the pipe.
+			<br>
+			Mario has a similar system to hide him when going in pipes, and it can be seen when performing the pipe glitch:
 		</p>
+		<br>
+		<img src="pipe-glitch.gif" alt="GIF of SMB3 pipe glitch">
 	</div>
 </body>

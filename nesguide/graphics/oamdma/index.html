@@ -175,113 +175,36 @@
 
 	<div class="main-area">
 		<p>
-			The NES has 2KB of video memory or VRAM - enough for 2 nametables, or 2 screens. This is how a majority of NES game graphics is displayed. The NES outputs
-			a resolution of 256x240, or 32x30 tiles, for a total of 960 tiles. Each tile is 1 byte, and the remaining bytes for each nametable is used to select palettes.
-			These remaining bytes are usually refered to as attributes.
-		</p>
-		<img src="memoryviewer.png" alt="Memory viewer showing nametable" style="width: 528px; height: 352px;">
-		<p>
-			Unfortunately, because of the amount of memory allocated for attributes, while tiles are 8x8, attribute areas are 16x16. The following image shows the tile
-			grid (blue) compares to the attribute grid (red). Many NES games used 16x16 meta-tiles to make things easier.
-		</p>
-		<img src="smb1grids.png" alt="Picture of tile and attribute grids over Super Mario Bros.">
-		<br>
-		<br>
-		<p>
-			Attribute bytes actually have control over 4 attribute areas (so, a 32x32 area). Some games use larger 32x32 meta-tiles to make things easier.
+			Writing to OAM RAM using the OAM Address ($2003) and OAM Data ($2004) registers can take a while, especially considering that it needs to be during vBlank / NMI.
+			However, there is a solution. The NES's CPU, the 2a03, has a feature for this, referred to as OAM DMA or Sprite DMA. DMA means Direct Memory Access, which basically
+			means that the CPU will access memory directly, without load and store instructions. 
 			<br>
-			This example shows how an attribute byte is used with an SMB1 pipe:
+			<br>
+			The CPU has a dedicated register for this, $4014 (or as Mesen labels it, SpriteDma_4014). Writing a value, XX, to this register will write the data between $XX00 and
+			$XXff to the OAM Data ($2004) register.
+			<br>
+			<br>
+			Since the CPU is accessing memory directly, without load/store instructions, this can be much faster than manually writing to $2004. Below is a speed comparison using
+			Mesen's Event Viewer. The yellow dots are writes to $2004. You can see that writing all 64 sprites to OAM RAM manually without OAM DMA doesn't even finish during vBlank!
 		</p>
-		<img src="nes-palette-stuff.png" alt="Showing how an attribute byte is used" style="width: 320px; height: 380px;">
+		<img src="withoutoamdma.png" alt="Event Viewer; No OAM DMA" style="width: 454px; height: 310px;">
+		<img src="withoamdma.png" alt="Event Viewer; With OAM DMA" style="width: 454px; height: 310px;">
 		<br>
 		<br>
 		<p>
-			Tile and attribute data can be uploaded to the PPU via $2006 (PPU Address) and $2007 (PPU Data).
-			<br>
-			The following code clears VRAM and displays "Hello, World" in the top-left corner. (This assumes the CHR-ROM has text in the correct positions.)
+			To use OAM DMA, you need to allocate 256 bytes in RAM to sprite data. Most NES games use $0200-$02ff for this. To actually write to $2004, you can write the page
+			number to $4014. In the case of $0200-$02ff, you would write $02. If you ever write to OAM Address ($2003) / OAM Data ($2004) manually at any point, you can also
+			write $00 to $2003 before the DMA transfer.
 		</p>
 		<br>
 		<p class="code">
-			HelloWorld:
-		</p>
-		<p class="code" style="margin-left: 86px;">
-			.byte "Hello, World!"
-		</p>
-		<p class="code">
+			lda #$00
 			<br>
-			; Clear VRAM
+			sta OamAddr_2003
 			<br>
-			lda #$20
+			lda #$02
 			<br>
-			sta PpuAddr_2006
-			<br>
-			lda #0
-			<br>
-			sta PpuAddr_2006
-			<br>
-			tax
-			<br>
-			ldy #$10
-			<br>
-			:
-		</p>
-		<p class="code" style="margin-left: 86px;">
-			sta PpuData_2007
-			<br>
-			inx
-			<br>
-			bne :-
-			<br>
-			dey
-			<br>
-			bpl :-
-			<br>
-			<br>
-		</p>
-		<p class="code">
-			; Write "Hello, World!" in the top-left corner, offset 1 tile on both axis
-			<br>
-			lda #$20
-			<br>
-			sta PpuAddr_2006
-			<br>
-			lda #$21
-			<br>
-			sta PpuAddr_2006
-			<br>
-			:
-		</p>
-		<p class="code" style="margin-left: 86px;">
-			lda HelloWorld,x
-			<br>
-			sta PpuData_2007
-			<br>
-			inx
-			<br>
-			cpx #12
-			<br>
-			bne :-
-			<br>
-			<br>
-		</p>
-		<p class="code">
-			; Enable rendering
-			<br>
-			lda #%00011110
-			<br>
-			sta PpuMask_2001
-		</p>
-		<br>
-		<br>
-		<p>
-			The result:
-		</p>
-		<img src="helloworld.png" alt="Hello, World!" style="width: 587px; height: 505px;">
-		<br>
-		<br>
-		<p>
-			If you haven't already realized, tile IDs are just indexes into CHR-ROM. One byte means a total of 256 tiles, or one table. If you want to use more than 256 background
-			tiles, you will need to use a mapper (<a href="/nesguide/mappers">8 - Mappers</a>).
+			sta SpriteDma_4014
 		</p>
 	</div>
 </body>
