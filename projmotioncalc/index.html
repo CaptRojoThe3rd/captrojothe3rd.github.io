@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+	<title>captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../styles.css">
+	<script src="../pages.js"></script>
+	<script src="projmotioncalc.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+	
+	<br>
+	<br>
+
+	<div class="general-bg">
+		<p class="general-font">
+			Projectile Motion Calculator v1.0
+			<br>
+			I made this for a physics project involving a trebuchet
+			<br>
+			(it's funny because I didn't even use this for the calculations, I did them on paper)
+			<br>
+			<br>
+			Note: Didn't bother to fix floating point errors, round the values you get!
+		</p>
+		
+		<br>
+		<br>
+
+		<br>
+		<label for="ay" class="mono-font">A<sub>y </sub> =</label>
+		<input id="ay" class="input-field" placeholder="Gravity" value="-9.81">
+		<p class="mono-font" style="display: inline;">m/s<sup>2</sup></p>
+		<br>
+		<label for="t" class="mono-font">T<sub>  </sub> =</label>
+		<input id="t" class="input-field" placeholder="Total Time">
+		<p class="mono-font" style="display: inline;">s</p>
+		<br>
+		<label for="x0" class="mono-font">X<sub>0 </sub> =</label>
+		<input id="x0" class="input-field" placeholder="Starting X Position">
+		<p class="mono-font" style="display: inline;">m</p>
+		<br>
+		<label for="y0" class="mono-font">Y<sub>0 </sub> =</label>
+		<input id="y0" class="input-field" placeholder="Starting Y Position">
+		<p class="mono-font" style="display: inline;">m</p>
+		<br>
+		<label for="xf" class="mono-font">X<sub>f </sub> =</label>
+		<input id="xf" class="input-field" placeholder="Final X Position">
+		<p class="mono-font" style="display: inline;">m</p>
+		<br>
+		<label for="yf" class="mono-font">Y<sub>f </sub> =</label>
+		<input id="yf" class="input-field" placeholder="Final Y Position">
+		<p class="mono-font" style="display: inline;">m</p>
+		<br>
+		<label for="ym" class="mono-font">Y<sub>m </sub> =</label>
+		<input id="ym" class="input-field" placeholder="Maximum Y Position">
+		<p class="mono-font" style="display: inline;">m</p>
+		<br>
+		<label for="v0" class="mono-font">V<sub>0 </sub> =</label>
+		<input id="v0" class="input-field" placeholder="Starting Velocity">
+		<p class="mono-font" style="display: inline;">m/s</p>
+		<br>
+		<label for="vx" class="mono-font">V<sub>x </sub> =</label>
+		<input id="vx" class="input-field" placeholder="X Velocity">
+		<p class="mono-font" style="display: inline;">m/s</p>
+		<br>
+		<label for="vy0" class="mono-font">V<sub>y0</sub> =</label>
+		<input id="vy0" class="input-field" placeholder="Starting Y Velocity">
+		<p class="mono-font" style="display: inline;">m/s</p>
+		<br>
+		<label for="vyf" class="mono-font">V<sub>yf</sub> =</label>
+		<input id="vyf" class="input-field" placeholder="Ending Y Velocity">
+		<p class="mono-font" style="display: inline;">m/s</p>
+		<br>
+		<label for="theta" class="mono-font">Θ<sub>  </sub> =</label>
+		<input id="theta" class="input-field" placeholder="Launch Angle">
+		<p class="mono-font" style="display: inline;">°</p>
+
+		<br>
+		<br>
+		<button class="big-button" style="padding-left: 120px; padding-right: 120px;" onclick="calculate();">Calculate</button>
+		<br>
+		<button class="reg-button" style="padding-left: 56px; padding-right: 56px; margin-right: -4px;" onclick="clearInputs();">Clear</button>
+		<button class="reg-button" style="padding-left: 6px; padding-right: 5px;" onclick="clearCalculated();">Clear Calculated</button>
+		
+	</div>
+
+	<script>
+		loadPageButtons();
+	</script>
+</body>

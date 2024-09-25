@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				Interrupts in the processor can signal that certain events have begun. There are two types of interrupts: Interrupt Requests (IRQs), and Non-Maskable Interrupts
+				(NMIs). You can see the labels for these interrupts in 'main.s':
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				NMIs can only be triggered from a source outside the CPU. In the case of the NES, this source is the PPU. When the PPU finishes drawing a frame, it reaches what is
+				called vBlank, or Vertical Blanking. This is very useful, as most graphics in the NES can only be updated during vBlank.
+				<br>
+				<br>
+				NMIs can't be disabled in the CPU, hence the name. They are instead controlled by the PPU in the PPUCTRL register. They can be enabled by setting bit 7 of PPUCTRL to
+				1. Using the labels we defined earlier, we can set PPUCTRL to this:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				After doing this, there is still a solid color on the screen, but now when we open Mesen's Event Viewer, we can see that an NMI is occurring at the end of the
+				visible frame:
+			</p>
+
+			<br>
+			<img src="nmiineventviewer.png" style="width: 50%; height: 50%;" alt="NMI in event viewer">
+			<br><br><br>
+
+			<p class="general-font">
+				The NMI event seems to "wiggle" because the CPU and PPU aren't perfectly in sync, and because the CPU is slower than the PPU.
+				<br>
+				<br>
+				There are also IRQs, or Interrupt Requests. These can be disabled or enabled by the CPU with the SEI and CLI instructions. Reset code usually begins with
+				SEI to disable interrupts. Note that on the stock NES, there aren't any useful IRQs from an external source. However, the BRK (Break) instruction allows for
+				software-generated IRQs:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Note that BRK has a signature byte after it. CA65 only generates one byte for the BRK instruction, so you should put a NOP instruction or some other byte after it.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 2);
+	</script>
+</body>

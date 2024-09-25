@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../styles.css">
+	<script src="../../../../pages.js"></script>
+	<script src="../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				Math is kind of important in NES games, and in computing in general. Everything a computer does boils down to math, and the NES is no exception.
+				<br>
+				<br>
+				Let's start with the most basic math: adding and subtracting. This is done with the ADC (Add With Carry) and SBC (Subtract With Carry) instructions:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				If you only need to add/subtract 1, you can use an Increment or Decrement instruction:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-11"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				In this example, memory address $01 is added to or subtracted from memory address $00, and the result is stored at memory address $02. But what are these SEC and CLC
+				instructions? Well, they are the Clear Carry Flag and Set Carry Flag instructions. But what is the Carry flag?
+				<br>
+				<br>
+				The NES's CPU is 8-bit. This means that the registers can only store values between 0 and 255 or -128 and 127. This isn't a very big range of numbers, and so programmers
+				will often run into the issue of 16-bit math on the NES's CPU. This is where the Carry flag comes in.
+				<br>
+				<br>
+				When you add two numbers together on paper, you've probably had to carry a 1 to the next digit. This should give you a clue as to what the Carry flag does. In order
+				to make 16-bit math easier, the Carry flag is set when the result of an addition is too big to fit in 8 bits. Then, when the next ADC instruction is executed, the Carry
+				flag is added to the result, like how you carry a 1 to the next digit. This makes 16-bit addition much easier:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				The code above adds the number at $02-$03 to the number at $00-$01, and then stores the result in $04-$05. The Carry flag is cleared for the first addition, since we
+				don't want to accidently carry in a 1. However, we don't change the carry flag before the second addition, since we do want to carry in a 1 if necessary. But what
+				about subtraction?
+				<br>
+				<br>
+				Well, subtraction with the Carry flag is also pretty simple. For subtraction, it makes more sense to refer to the Carry flag as the "Borrow" flag, and this should also
+				give you a clue as to how the flag is used here.
+				<br>
+				<br>
+				When an SBC instruction runs, it performs a subtraction. If that subtraction were to underflow (for example, if the lower 8 bits were to result in the operation 7 - 9),
+				then the Carry flag is cleared. Otherwise, it is set. When the next SBC instruction runs, if the Carry flag is clear, then the SBC instruction will subtract 1 from the
+				result, making 16-bit subtraction also very simple:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				There isn't actually a limit on how many times you can use the Carry flag. You can do math that is 32-bit, 64-bit, 128-bit, or anything in between - just don't
+				reset the Carry flag before the next ADC instruction.
+				<br>
+				<br>
+				But what about multiplication and division? Those are also very useful operations. Unfortunately, the NES's CPU doesn't have any dedicated multiply and divide 
+				instructions. However, there are a few workarounds.
+				<br>
+				<br>
+				First of all, if you are multiplying or dividing by a power of 2 (2, 4, 8, 16...), you can just use bit shifts. To multiply, you would bit shift left using the ASL
+				(Arithmetic Shift Left) instruction, and to divide, you would bit shift right using the LSR (Logical Shift Right) instruction:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-3"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				But what if you aren't multiplying or dividing by a power of 2? Well, if the multiplier, then you can combine bit shifts with addition or
+				subtraction. Dividing is a little more difficult.
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-4"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				If your multiplier isn't constant or your divisor isn't a power of 2, you can use a dedicated subroutine for multiplication or division:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-5"></p>
+			</div>
+			<br>
+			
+			<p class="general-font">
+				These subroutines can be called with the JSR (Jump To Subroutine) instruction:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-6"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				You may have noticed ROR and ROL instructions in the multiplication and division routines. Those are Rotate Right and Rotate Left instructions. They function
+				similarly to the ASL and LSR instructions, except that they shift in the Carry flag:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-7"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				These instructions allow for shifting 16-bit (or bigger) numbers:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-8"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Finally, we need to talk about negative numbers. How do they work?
+				<br>
+				<br>
+				Negative numbers are stored in what is called "2's complement". In this system, numbers $00-$7f are normal, in that they still represent numbers 0-127. However,
+				$80-$ff are not "normal." They represent numbers -128 to -1. That means $ff = -1, $fe = -2, and so on. This system is actually very good, since it means the ADC and
+				SBC instructions can handle negative numbers without any changes.
+				<br>
+				<br>
+				But what about bit shifts? Well, you may have noticed that the shift-left instruction is known as <u>Arithmetic</u> Shift Left, while the shift-right instruction is
+				known as <u>Logical</u> Shift Right. Why the difference?
+				<br>
+				<br>
+				The ASL instruction has "Arithmetic" in its name because it is basically compatible with negative numbers. The bit that would indicate a negative number is shifted into
+				the carry flag, meaning the code to make sure the number keeps its sign is very simple:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-9"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				The LSR instruction, on the other hand, doesn't work with signed numbers. However, here is a simple workaround:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-10"></p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 11);
+	</script>
+</body>

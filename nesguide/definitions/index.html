@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../styles.css">
+	<script src="../../pages.js"></script>
+	<script src="../nespages.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				This section defines terms used later in the guide. Feel free to return to this section at any point in the guide if you need a refresher.
+				<br>
+				<br>
+				<br>
+				<b>PRG-ROM</b>
+				<br>
+				PRG-ROM, or Program ROM, is where the code you write is stored. The CPU usually reads PRG-ROM from $8000-$ffff.
+				<br>
+				<br>
+				<b>CHR-ROM</b>
+				<br>
+				CHR-ROM, or Character ROM, is where your game's graphics data is stored. Note that not all games have a CHR-ROM, instead opting for CHR-RAM.
+				<br>
+				<br>
+				<b>CHR-RAM</b>
+				<br>
+				Some games opt for this instead of CHR-ROM. Called 'Character RAM', it is cleared during reset and can be loaded with any data from PRG-ROM. This
+				allows the game to animate many tiles in the background by changing the data stored here as you are playing.
+				<br>
+				<br>
+				<b>Address Space</b>
+				<br>
+				The Address Space is a term used to describe what memory addresses correspond to different components. A memory map lists everything in an address space, in order.
+				<br>
+				<br>
+				<b>Mirroring</b>
+				<br>
+				A memory region or register group that is mirrored means that it is repeating or appears at multiple locations. For example, the CPU RAM appears at $0000-$07ff, and is
+				mirrored at $0800-$0fff, $1000-$17ff, and $1800-$1fff.
+				<br>
+				<br>
+				<b>CPU</b>
+				<br>
+				The CPU, or Central Processing Unit, is the brain of the NES, and it runs the code you write.
+				<br>
+				<br>
+				<b>APU</b>
+				<br>
+				The APU is a part of the CPU, and it handles audio and a register for giving sprite data to the PPU.
+				<br>
+				<br>
+				<b>PPU</b>
+				<br>
+				The PPU, or Picture Processing Unit, handles all of the graphics of the NES. It has its own address space, and has a a handful of registers that the CPU can read from
+				or write to in order to talk to the PPU.
+				<br>
+				<br>
+				<b>Cartridge</b>
+				<br>
+				The thing with your game on it that you put into the console. Nintendo calls this the 'Game Pak'.
+				<br>
+				<br>
+				<b>CIC</b>
+				<br>
+				The CIC, or Checking Integrated Circuit, was a chip placed in all cartridges. When the console is powered on, the CIC chip in the cartridge communicates with the CIC
+				chip in the console to authenticate the game. If this is successful, the game runs as normal. If the CIC in the console fails to communicate with the CIC in the cartridge,
+				the console will be reset after 1 second, effectively rendering the game unplayable.
+				<br>
+				<br>
+				<b>Mapper</b>
+				<br>
+				There are a lot of different cartridge variants. Many of these variants are often referred to as 'mappers', since they 'map' larger ROM chips into the small address
+				spaces of the NES. This allows for much more complex games, with the largest mappers allowing games to have up to 1 MiB of PRG-ROM and 1 MiB of CHR-ROM. Mappers can
+				also add other features such as a scanline-based IRQ, allowing for more complex visual effects.
+				<br>
+				<br>
+				<b>NROM</b>
+				<br>
+				The most basic cartridge. Containing only a PRG-ROM chip, CHR-ROM chip, and a CIC chip. Max PRG-ROM size is 32 KiB, max CHR-ROM size is 8 KiB.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		//loadCodeContent(code, 0);
+	</script>
+</body>

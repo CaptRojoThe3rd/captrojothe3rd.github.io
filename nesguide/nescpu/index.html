@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../styles.css">
+	<script src="../../pages.js"></script>
+	<script src="../nespages.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				So far, you've just been copying all of the code I've written. Now, I'm going to tell you how you write your own code for the NES.
+				<br>
+				<br>
+				The NES's CPU, the 2A03 (or 2A07 in Europe), is based on the MOS 6502. In fact, Ricoh, the maker of the 2A03, used a legal loophole to avoid paying fees to MOS when 
+				making the 2A03. Unfortunately, this involved removing the 6502's Binary Coded Decimal system, which is a shame, as it would have been useful for things like 
+				points/player scores.
+			</p>
+
+			<br><br>
+			<img src="2a036502.png" style="width: 33%; height: 33%;" alt="2a03 and 6502">
+			<img src="2a03cpu.jpg" style="width: 45.5%; height: 45.5%;" alt="2a03 in an NES motherboard">
+			<br><br><br>
+
+			<p class="general-font">
+				In Mesen, you can see everything about the CPU in the Debugger. The disassembly (in red) shows you a disassembled version of the game's code, and shows you what
+				instructions the CPU is currently executing. The status (in yellow) shows you the state of the CPU, displaying the contents of registers and processor flags.
+			</p>
+
+			<br>
+			<img src="debugger_cpu.png" style="width: 50%; height: 50%;" alt="Mesen Debugger">
+			<br><br>
+
+			<p class="general-font">
+				Mesen shows a description of each instruction when you hover over it. Combined with the processor status and the stepping functions (above the disassembly), this
+				could be a decent way of learning 6502 Assembly. I mean, it's how I learned it. Just set a breakpoint (right click) on an instruction you're confused by, step over it,
+				and see how the processor status changes.
+				<br>
+				<br>
+				Another useful debugging tool is the Memory Viewer, which shows the entire memory of the console.
+			</p>
+
+			<br>
+			<img src="memory_viewer.png" style="width: 50%; height: 50%;" alt="Memory Viewer">
+			<br><br>
+
+			<p class="general-font">
+				You can change which memory space you are viewing - the default is CPU's memory space, but this can be changed to the PPU's memory space, or one of the various
+				bits of memory in the console.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		//loadCodeContent(code, 0);
+	</script>
+</body>

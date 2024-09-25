@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				Like I said on the previous page, the 2A03 is based on the 6502, which means it runs on 6502 Assembly.
+				<br>
+				<br>
+				Mesen's debugger shows a description for each instruction, and combined with its stepping functions and processor status, you could learn 6502 Assembly like 
+				me by seeing how each instruction affects the CPU.
+				<br>
+				<br>
+				If you want a detailed explanation of each instruction, you can see <a href="http://www.6502.org/tutorials/6502opcodes.html" target="_blank">this page</a>.
+				<br>
+				<br>
+				Here's a 6502 Assembly example. It is actually code to start up the NES. See if you can understand what each part does:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				While you are here, you should copy this code into main.s, replacing the "jmp Reset" instruction. At the end of the reset code, you can add "jmp *".
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 0);
+	</script>
+</body>

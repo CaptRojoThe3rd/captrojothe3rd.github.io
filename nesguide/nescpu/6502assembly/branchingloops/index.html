@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../styles.css">
+	<script src="../../../../pages.js"></script>
+	<script src="../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				In order to make any useful program, conditional logic is needed. In 6502 Assembly, this is accomplished with branch instructions. Branch instructions will only
+				move the program counter somewhere else if the corresponding flag is set or clear. Otherwise, execution will continue without branching.
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Note that branch instructions use relative addressing, and the operand is only one byte. This means that a branch instruction can only branch backward 128 bytes, or
+				forward 127 bytes. If you want to branch further, you can use the opposite branch instruction followed by a jump instruction:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				However, branch instructions on their own aren't enough. Arithmetic and memory instructions can affect processor flags, but a very useful instruction is the Compare
+				instruction. There is one compare instruction per register:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				The Compare instructions allow you to make basic determinations about values. The three easiest are Not Equal, Equal, Less Than, and Greater Than Or Equal To.
+				These are achieved as follows:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-3"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Note that if you are using signed numbers (numbers that can be negative), when checking for Less Than or Greater Than Or Equal To, you need to use BMI/BPL instead
+				of BCS/BCC:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-4"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				You may have noticed that in the above examples, I positioned the label above the branch instruction. When you do this, you effectively create a conditonal loop.
+				For example, the below code will loop until the X register is zero.
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-5"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Note that the DEX instruction will set/clear the processor flags on its own - this means that you don't need a compare instruction to check if an operation results
+				in zero. If you want to check for a value other than zero, you can just add this compare instruction:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-6"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				But what if you want to set/clear a processor flag? Well, there are dedicated instructions for that:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-7"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Since there aren't set/clear instructions for all flags, here are some alternative bits of code for those flags:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-8"></p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 8);
+	</script>
+</body>

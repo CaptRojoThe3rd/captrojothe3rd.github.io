@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../styles.css">
+	<script src="../../../../pages.js"></script>
+	<script src="../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				The 6502/2A03 has a handful of registers inside of it: the Accumulator (A), two Index Registers (X and Y), a Stack Pointer (S, aka SP), the Processor Status (P), 
+				and the Program Counter (PC). 
+				<br>
+				<br>
+				A, X, and Y can be loaded with whatever you want and stored wherever you want. The Stack Pointer, S, can be loaded and stored by transfering its data between 
+				the X register using the TXS and TSX instructions, but the Stack Pointer serves its own purpose with the stack, so these instructions are rare (many programs never 
+				even use TSX).
+				<br>
+				<br>
+				The Processor Status, P, contains flags for the processor. Some are only set by the programmer, such as the Interrupt Disable (I) flag or the Decimal Mode (D) flag.
+				Others are set by any instruction affecting a register, such as the Zero (Z) flag or the Negative (N) flag. Others still are only set by arithmetic/logic instructions,
+				such as addition or bit shifts. These are the Overflow (V) and Carry (C) flags.
+				<br>
+				<br>
+				The Program Counter, PC, stores the memory address of what instruction the CPU is currently executing. It isn't really "loaded". It is changed when an instruction is
+				completed, and some instructions (Branch and Jump instructions) can change it to different areas of the program. It is "stored" when it is pushed onto the stack when
+				a JSR (Jump To Subroutine) or BRK (Break) instruction is executed. It is also "loaded" when an RTS (Return From Subroutine) or RTI (Return From Interrupt) pulls it 
+				from the stack.
+				<br>
+				<br>
+				All of the CPU registers can be viewed in the Status section of the Debugger:
+			</p>
+
+			<br>
+			<img src="status.png" style="width: 50%; height: 50%;" alt="Status section of debugger">
+			<br><br><br>
+
+			<p class="general-font">
+				Now, three or four 8-bit registers isn't enough memory to accomplish much. That's where RAM comes in. The NES has 2 KiB of RAM mapped to addresses $0000-$07ff
+				(and is mirrored at $0800-$1fff). You can use this RAM using load and store instructions, as well as instructions that only affect values in RAM:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				There are also some instructions to transfer between registers, and push/pull registers onto/from the stack:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-4"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				However, the console does have more registers and memory than what I've listed. First, we have the PPU registers. These are at addresses $2000-$2007. These registers
+				are how the CPU communicates with the PPU. There are also the APU registers at $4000-$401f, which handle audio, controllers, and the moving of sprite data. The PPU
+				registers are mirrored at $2008-$3fff. The APU registers are not mirrored anywhere.
+			</p>
+
+			<br><br>
+			<div class="code-object">
+				<p class="code-font" id=code-1></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				You can also read from any location in the PRG-ROM:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				Some cartridges can also have their own RAM, which can be battery-backed for saving games. This is referred to as PRG-RAM or WRAM. This is usually 8 KiB of RAM at $6000-$7fff:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-3"></p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 4);
+	</script>
+</body>
+
+<!--
+<p class="general-font">
+	However, the console does have more registers and memory than what I've listed. First, we have the PPU registers. These registers are how the CPU communicates with
+	the PPU, the Picture Processing Unit. There are 8 of these registers. Two of them control how the PPU renders graphics - PPUCTRL and PPUMASK. They are at memory addresses
+	$2000 and $2001. There is also the PPUSTATUS register, which the CPU can read to get some specific information about what is currently happening in the PPU. This register
+	is at address $2002.
+	<br>
+	<br>
+	There are also PPU registers for writing to or reading from the PPU's memory. First, there are the OAMADDR and OAMDATA registers at addresses $2003 and $2004. These
+	registers aren't actually used much, with a game only needing to write to OAMADDR once and never needing to write to OAMDATA. Moving sprite data is generally handled
+	by APU register OAMDMA, at address $4014. Two more registers - PPUADDR and PPUDATA at $2006 and $2007 - are used to read from and write to the PPU's address space,
+	which contains CHR-ROM/RAM ($0000-$1fff), VRAM ($2000-$2fff), and Palette RAM ($3f00-$3f1f).
+	<br>
+	<br>
+	Finally, there is the PPUSCROLL register at address $2005. This controls where the top left corner of the screen is.
+	<br>
+	<br>
+	Another thing: PPUSCROLL and PPUADDR are both 16-bit registers, but they only use one memory location. To write to PPUADDR, you first write the upper 8 bits of the address,
+	and then you write the lower 8 bits of the address. To write to PPUSCROLL, you first write the X scroll, and then you write the Y scroll.
+</p>
+
+<br><br>
+<div class="code-object">
+	<p class="code-font" id="code-1"></p>
+</div>
+<br><br>
+
+<p class="general-font">
+	Note that Mesen has slightly different names for its labels:
+</p>
+
+<br>
+<div class="code-object">
+	<p class="code-font" id="code-2"></p>
+</div>
+<br><br>
+-->

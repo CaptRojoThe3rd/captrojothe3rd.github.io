@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../styles.css">
+	<script src="../../../../pages.js"></script>
+	<script src="../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				In 6502 Assembly, there are many addressing modes. Addressing modes are how the instructions the CPU executes load or store data.
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				<b>Implied</b>
+				<br>
+				Implied addressing, well, means that the data affected by the instruction is implied and can't be changed.
+				<br>
+				<br>
+				<b>Accumulator</b>
+				<br>
+				Instructions using this mode affect the Accumulator.
+				<br>
+				<br>
+				<b>Immediate</b>
+				<br>
+				Instructions using this mode load an immediate value, rather than a value from somewhere in memory.
+				<br>
+				<br>
+				<b>Zero Page</b>
+				<br>
+				Instructions using this mode load or store a value from somewhere in the Zeropage. The Zeropage is the first page in memory, at $0000-$00ff. The only difference between
+				this and Absolute addressing is that Zeropage addressing is slightly faster.
+				<br>
+				<br>
+				<b>Zero Page Indexed With X</b>
+				<br>
+				Like Zero Page addressing, but the X register is added to the address. If X is $05, then LDA $03,X would load the value at memory address $08.
+				<br>
+				<br>
+				<b>Absolute</b>
+				<br>
+				Loads or stores a value at a memory address. Slower than Zero Page addressing, but allows you to access more than just $0000-$00ff.
+				<br>
+				<br>
+				<b>Absolute Indexed With X</b>
+				<br>
+				Like Absolute addressing, but the X register is added to the address. If X is $05, then LDA $0420,X would load the value at memory address $0425.
+				<br>
+				<br>
+				<b>Absolute Indexed With Y</b>
+				<br>
+				Same as above, but the Y register is added instead of X.
+				<br>
+				<br>
+				<b>Zero Paged Indexed Indirect</b>
+				<br>
+				In this addressing mode, the X register is first added to the address. Then, a new address is loaded from this address. The value that is loaded/stored is loaded/stored
+				at this new address. If X is $05, and $07/$08 contains $abcd, then the instruction is LDA ($02,X), then X is added to $02 to get an address of $07, and then the new address
+				is loaded from $07/$08. So, the Accumulator would be loaded with the value at $abcd.
+				<br>
+				<br>
+				<b>Zero Paged Indirect Indexed</b>
+				<br>
+				In this addressing mode, a new address is fetched at the specified address. The Y register is then added to this new address to get the address of the value loaded/stored.
+				So, if Y is $05, $00/$01 is $6000, then LDA ($00),Y would load the address at $00/$01, which is $6000. Then, the Y register is added, so the value loaded into the
+				Accumulator is at $6005.
+				<br>
+				<br>
+				<b>Relative</b>
+				<br>
+				Branch instructions are the only instructions that use this mode. When a branch is taken, the value loaded from this instruction is added to the Program Counter. This
+				value is signed, allowing you to branch forward or backward +127 or -128 bytes.
+				<br>
+				<br>
+				<b>Indirect</b>
+				<br>
+				The only instruction that uses this mode is JMP (Jump). In the case of JMP ($eeee), the processor loads the address at $eeee/$eeef, and then jumps to it.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 0);
+	</script>
+</body>

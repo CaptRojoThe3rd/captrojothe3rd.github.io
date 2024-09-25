@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../styles.css">
+	<script src="../../../../pages.js"></script>
+	<script src="../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				No, you won't get sued by Nintendo for using these instructions. Illegal instructions are instructions that weren't ever intended to be exist in the CPU, but do,
+				for one reason or another. Naturally, many of these instructions have bugs or unintuitive behavior. A handful will just crash the CPU.
+				<br>
+				<br>
+				I'll only cover the illegal instructions CA65 supports (which are also the only stable ones), with the exception of STP:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				<b>ALR</b>
+				<br>
+				ANDs Accumulator with value, then shifts right. Equivalent to an AND instruction followed by an LSR instruction. 
+				<br>
+				<br>
+				<b>ANC</b>
+				<br>
+				ANDs Accumulator with value, then copies bit 7 into carry flag. 
+				<br>
+				<br>
+				<b>AXS</b>
+				<br>
+				Sets X to X AND Accumulator minus a value. 
+				<br>
+				<br>
+				<b>DCP</b>
+				<br>
+				Decrements value at memory address, sets flags as if value has been compared with the Accumulator. Equivalent to DEC instruction followed by a CMP instruction. 
+				<br>
+				<br>
+				<b>ISC</b>
+				<br>
+				Increments value at memory address, subtracts value at memory address from Accumulator. Equivalent to INC instruction followed by a SBC instruction. 
+				<br>
+				<br>
+				<b>LAS</b>
+				<br>
+				Sets Accumulator, X, and Stack Pointer to Stack Pointer AND value at memory address. 
+				<br>
+				<br>
+				<b>LAX</b>
+				<br>
+				Loads Accumulator and X with value at memory address. Equivalent to an LDA instruction followed by a TAX instruction.
+				<br>
+				<br>
+				<b>RLA</b>
+				<br>
+				Rotates value at memory address left, then ANDs Accumulator with value at memory address. Equivalent to a ROL instruction followed by an AND instruction. 
+				<br>
+				<br>
+				<b>RRA</b>
+				<br>
+				Rotates value at memory address right, then adds value at memory address with the Accumulator. Equivalent to a ROR instruction followed by an ADC instruction. 
+				<br>
+				<br>
+				<b>SAX</b>
+				<br>
+				Stores Accumulator AND X and stores it at memory address. 
+				<br>
+				<br>
+				<b>SLO</b>
+				<br>
+				Shifts value at memory address left, then ORs Accumulator with value at memory address. Equivalent to an ASL instruction followed by an ORA instruction. 
+				<br>
+				<br>
+				<b>SRE</b>
+				<br>
+				Shifts value at memory address right, then XORs Accumulator with value at memory address. Equivalent to an LSR instruction followed by an EOR instruction. 
+				<br>
+				<br>
+				<b>STP</b>
+				<br>
+				Stops execution. This isn't actually supported by CA65, but it is somtimes useful for debugging or other purposes. Since it isn't supported by CA65, you need to 
+				write the opcode manually or use a macro. 
+				<br>
+				<br>
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 0);
+	</script>
+</body>

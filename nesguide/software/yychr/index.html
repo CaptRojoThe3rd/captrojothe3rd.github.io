@@ -1,202 +1,79 @@
 <!DOCTYPE html>
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
 </head>
 <body>
-	<div class="top-area" style="height: 150px;">
-		<div class="title">
-			<p>
-				captrojothe3rd.github.io
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br><br>
+
+			<a class="url-font" href="https://w.atwiki.jp/yychr/sp/" target="_blank">Download YYCHR here</a>
+
+			<br><br>
+			<img src="yychr.png" style="width: 35%; height: 35%;" alt="YYCHR download page">
+			<br><br>
+			
+			<p class="general-font">
+				YYCHR is a program for editing CHR-ROM data. It is how you will edit graphics for your NES games.
+				<br>
+				<br>
+				When started, YYCHR will look like the following. You can create a new CHR-ROM by clicking the "New" button. Note that it will create a 16KB CHR-ROM - the NES
+				only allows 8 KiB of CHR-ROM without any special cartridges.
 			</p>
-		</div>
-		<div id="chrome-height-adjust" style="height: 0px;"></div>
-		<div class="subtitle-adjust">
-			<div class="normal-centered-text">
-				<p>
-					eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-				</p>
-			</div>
-			<div style="width: 50%; margin: auto; margin-top: -20px;">
-				<center>
-					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io'">Home</button>
-					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io/calculators'">Calculators</button>
-					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io/nesguide'">NES Programming</button>
-				</center>
-			</div>
+
+			<br><br>
+			<img src="yychr_default.png" style="width: 50%; height: 50%" alt="YYCHR application">
+			<br><br>
+
+			<p class="general-font">
+				If you want to create a smaller or larger CHR-ROM, you can use a hex editor. The NES's 8 KiB window is 0x2000 in size, so the file should go from 0x0000 to 0x1fff.
+
+				<br>
+				<br>
+
+				You could use a different program for editing graphics, such as Piskel. YYCHR supports copying and pasting pixel data, and the temporary bitmap section is useful
+				for this, since the colors may not always paste correctly. 
+
+				<br>
+				<br>
+				<br>
+
+				In YYCHR, there are 3 main sections: On the left, you have the window into the CHR data. This shows an entire 128x128 section of CHR data, or one page in the case
+				of the NES. You can see a (by default) 4x4 tile selection box, and clicking in this window moves the selection box around. Note that you can change the
+				size of the selection box by holding CTRL and scrolling while hovering your mouse over this area.
+				<br>
+				<br>
+				On the top right, you have the zoomed-in version of the selection box. This allows you to edit each pixel of the tiles you have selected. Holding CTRL and scrolling
+				selects the tool on the very right of the window. Left click to draw, right click to pick the color of the pixel.
+				<br>
+				<br>
+				On the bottom right, you have the palette selection. The top part allows you to change between multiple 4-color palettes. The bottom part allows you to change what
+				colors make up the 4-color palette.
+				<br>
+				<br>
+				<br>
+				YYCHR also supports opening NES ROMs. If you have an NES game that you'd like to edit the graphics of, YYCHR will let you do that.
+			</p>
+
+			<br><br>
+			<img src="yychr_smb1.png" style="width: 50%; height: 50%" alt="Super Mario Bros. graphics data opened in YYCHR">
+			<br><br>
 		</div>
 	</div>
 
-	<div class="side-area">
-		<br>
-		<!-- Title -->
-		<p style="line-height: 10px; margin-top: 10px; font-size: 20px; margin-left: 10px;">NES Programming Guide</p>
-			<!--1 - Software-->
-			<a href="/nesguide/software" style="font-size: 16px; margin-left: 30px;">1 - Software</a>
-			<br>
-				<!--1.1 - CA65-->
-				<a href="/nesguide/software/ca65" style="font-size: 16px; margin-left: 50px;">1.1 - CA65</a>
-				<br>
-				<!--1.2 - VSCode-->
-				<a href="/nesguide/software/vscode" style="font-size: 16px; margin-left: 50px;">1.2 - VSCode</a>
-				<br>
-				<!--1.3 - YYCHR-->
-				<a href="/nesguide/software/yychr" style="font-size: 16px; margin-left: 50px;">1.3 - YYCHR</a>
-				<br>
-				<!--1.4 - NES Emulator-->
-				<a href="/nesguide/software/emulator" style="font-size: 16px; margin-left: 50px;">1.4 - NES Emulator</a>
-				<br>
-				<!--1.5 - Hex Editor-->
-				<a href="/nesguide/software/hex" style="font-size: 16px; margin-left: 50px;">1.5 - Hex Editor</a>
-				<br>
-				<!--1.6 - Python-->
-				<a href="/nesguide/software/python" style="font-size: 16px; margin-left: 50px;">1.6 - Python</a>
-				<br>
-			<!--2 - Setup-->
-			<a href="/nesguide/setup" style="font-size: 16px; margin-left: 30px;">2 - Setup</a>
-			<br>
-				<!--2.1 - Required Code-->
-				<a href="/nesguide/setup/requiredcode" style="font-size: 16px; margin-left: 50px;">2.1 - Required Code</a>
-				<br>
-				<!--2.2 - Adding CHR-ROM Data-->
-				<a href="/nesguide/setup/chrrom" style="font-size: 16px; margin-left: 50px;">2.2 - Adding CHR-ROM Data</a>
-				<br>
-				<!--2.3 - Build Task-->
-				<a href="/nesguide/setup/buildtask" style="font-size: 16px; margin-left: 50px;">2.3 - Build Task</a>
-				<br>
-			<!--3 - 6502 Assembly-->
-			<a href="/nesguide/6502assembly" style="font-size: 16px; margin-left: 30px;">3 - 6502 Assembly</a>
-			<br>
-				<!--3.1 - CA65 Features-->
-				<a href="/nesguide/6502assembly/ca65features" style="font-size: 16px; margin-left: 50px;">3.1 - CA65 Features</a>
-				<br>
-				<!--3.2 - Load/Store Instructions-->
-				<a href="/nesguide/6502assembly/loadstore" style="font-size: 16px; margin-left: 50px;">3.2 - Load/Store Instructions</a>
-				<br>
-				<!--3.3 - Arithmetic Instructions-->
-				<a href="/nesguide/6502assembly/arithmetic" style="font-size: 16px; margin-left: 50px;">3.3 - Arithmetic Instructions</a>
-				<br>
-				<!--3.4 - Comparison Instructions-->
-				<a href="/nesguide/6502assembly/comparison" style="font-size: 16px; margin-left: 50px;">3.4 - Comparison Instructions</a>
-				<br>
-				<!--3.5 - Jump/Branching Instructions-->
-				<a href="/nesguide/6502assembly/jumpbranching" style="font-size: 16px; margin-left: 50px;">3.5 - Jump/Branching Instructions</a>
-				<br>
-				<!--3.6 - Register/Flag Instructions-->
-				<a href="/nesguide/6502assembly/registerflag" style="font-size: 16px; margin-left: 50px;">3.6 - Register/Flag Instructions</a>
-				<br>
-				<!--3.7 - Stack Instructions-->
-				<a href="/nesguide/6502assembly/stack" style="font-size: 16px; margin-left: 50px;">3.7 - Stack Instructions</a>
-				<br>
-				<!--3.8 - Illegal Instructions-->
-				<a href="/nesguide/6502assembly/illegal" style="font-size: 16px; margin-left: 50px;">3.8 - Illegal Instructions</a>
-				<br>
-			<!--4 - NES Hardware-->
-			<a href="/nesguide/hardware" style="font-size: 16px; margin-left: 30px;">4 - NES Hardware</a>
-			<br>
-				<!--4.1 - Memory Layout-->
-				<a href="/nesguide/hardware/memorylayout" style="font-size: 16px; margin-left: 50px;">4.1 - Memory Layout</a>
-				<br>
-				<!--4.2 - CPU Registers-->
-				<a href="/nesguide/hardware/cpuregisters" style="font-size: 16px; margin-left: 50px;">4.2 - CPU Registers</a>
-				<br>
-				<!--4.3 - PPU Registers-->
-				<a href="/nesguide/hardware/ppuregisters" style="font-size: 16px; margin-left: 50px;">4.3 - PPU Registers</a>
-				<br>
-			<!--5 - Graphics-->
-			<a href="/nesguide/graphics" style="font-size: 16px; margin-left: 30px;">5 - Graphics</a>
-			<br>
-				<!--5.1 - Editing CHR-ROM-->
-				<a href="/nesguide/graphics/editingchrrom" style="font-size: 16ppx; margin-left: 50px;">5.1 - Editing CHR-ROM</a>
-				<br>
-				<!--5.2 - Palettes-->
-				<a href="/nesguide/graphics/palettes" style="font-size: 16px; margin-left: 50px;">5.2 - Palettes</a>
-				<br>
-				<!--5.3 - Background Tiles-->
-				<a href="/nesguide/graphics/bgtiles" style="font-size: 16px; margin-left: 50px;">5.3 - Background Tiles</a>
-				<br>
-				<!--5.4 - Sprites-->
-				<a href="/nesguide/graphics/sprites" style="font-size: 16px; margin-left: 50px;">5.4 - Sprites</a>
-				<br>
-				<!--5.5 - OAM DMA-->
-				<a href="/nesguide/graphics/oamdma" style="font-size: 16px; margin-left: 50px;">5.5 - OAM DMA</a>
-				<br>
-				<!--5.6 - Scrolling-->
-				<a href="/nesguide/graphics/scrolling" style="font-size: 16px; margin-left: 50px;">5.6 - Scrolling</a>
-				<br>
-				<!--5.7 - Sprite 0-->
-				<a href="/nesguide/graphics/spritezero" style="font-size: 16px; margin-left: 50px;">5.7 - Sprite 0</a>
-				<br>
-			<!--6 - Audio-->
-			<a href="/nesguide/audio" style="font-size: 16px; margin-left: 30px;">6 - Audio</a>
-			<br>
-				<!--6.1 - Square Channels-->
-				<a href="/nesguide/audio/square" style="font-size: 16px; margin-left: 50px;">6.1 - Square Channels</a>
-				<br>
-				<!--6.2 - Triangle Channel-->
-				<a href="/nesguide/audio/triangle" style="font-size: 16px; margin-left: 50px;">6.2 - Triangle Channel</a>
-				<br>
-				<!--6.3 - Noise Channel-->
-				<a href="/nesguide/audio/noise" style="font-size: 16px; margin-left: 50px;">6.3 - Noise Channel</a>
-				<br>
-				<!--6.4 - DPCM-->
-				<a href="/nesguide/audio/dpcm" style="font-size: 16px; margin-left: 50px;">6.4 - DPCM</a>
-				<br>
-			<!--7 - Input-->
-			<a href="/nesguide/input" style="font-size: 16px; margin-left: 30px;">7 - Input</a>
-			<br>
-				<!--7.1 - 1/2 Controllers-->
-				<a href="/nesguide/input/singlecontroller" style="font-size: 16px; margin-left: 50px;">7.1 - 1/2 Controllers</a>
-				<br>
-				<!--7.2 - 3/4 Controllers Using Four Score-->
-				<a href="/nesguide/input/fourscore" style="font-size: 16px; margin-left: 50px;">7.2 - 3/4 Controllers Using Four Score</a>
-				<br>
-				<!--7.3 - Zapper Gun-->
-				<a href="/nesguide/input/zappergun" style="font-size: 16px; margin-left: 50px;">7.3 - Zapper Gun</a>
-				<br>
-				<!--7.4 - Family Basic Keyboard-->
-				<a href="/nesguide/input/familybasickeyboard" style="font-size: 16px; margin-left: 50px;">7.4 - Family Basic Keyboard</a>
-				<br>
-				<!--7.5 - Power Pad-->
-				<a href="/nesguide/input/powerpad" style="font-size: 16px; margin-left: 50px;">7.5 - Power Pad</a>
-				<br>
-			<!--8 - Mappers-->
-			<a href="/nesguide/mappers" style="font-size: 16px; margin-left: 30px;">8 - Mappers</a>
-			<br>
-				<!--8.1 - MMC1-->
-				<a href="/nesguide/mappers/mmc1" style="font-size: 16px; margin-left: 50px;">8.1 - MMC1</a>
-				<br>
-				<!--8.2 - MMC3-->
-				<a href="/nesguide/mappers/mmc3" style="font-size: 16px; margin-left: 50px;">8.2 - MMC3</a>
-				<br>
-				<!--8.3 - MMC5-->
-				<a href="/nesguide/mappers/mmc5" style="font-size: 16px; margin-left: 50px;">8.3 - MMC5</a>
-				<br>
-	</div>
-
-	<div class="main-area">
-		<p>
-			YYCHR is a program for editing CHR-ROM data.
-			<br>
-			It can be downloaded here: <a href="https://w.atwiki.jp/yychr/sp/" target="_blank">https://w.atwiki.jp/yychr/sp/</a>
-		</p>
-		<img src="yychr_webpage.png" alt="YYCHR webpage" style="width: 678px; height: 330px;">
-		<br>
-		<br>
-		<p>
-			When started, YYCHR will look like the following. You can create a new CHR-ROM by clicking the "New" button. Note that it will create a 16KB CHR-ROM, double 
-			the size of the NES's 8KB window.
-		</p>
-		<img src="yychr_default.png" alt="YYCHR default" style="width: 588px; height: 397px;">
-		<br>
-		<br>
-		<p>
-			If you want to create a smaller or larger CHR-ROM, you can use a hex editor (<a href="/nesguide/software/hex">1.5 - Hex Editor</a>). The NES's 8KB window
-			is 0x2000 in size, or 0x0000-0x1fff.
-			<br>
-			<br>
-			You can also create pixel art in another program if you'd like; I would recommend Piskel if you do (<a href="https://www.piskelapp.com/" target="_blank">https://www.piskelapp.com/</a>).
-			To copy the image data to YYCHR, you can just copy the pixels themselves (for Windows: just open the image, right click it, and copy) and paste them into YYCHR. The program
-			has a BMP bitmap section that is useful for this.
-		</p>
-	</div>
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+	</script>
 </body>

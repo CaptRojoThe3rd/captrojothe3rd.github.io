@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../../styles.css">
+	<script src="../../../../../pages.js"></script>
+	<script src="../../../../nespages.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				The Stack is a list of values stored at $0100-$01ff in memory. The list works first-in, last-out, and starts at $1ff and moves down. As you push more things onto
+				the stack, the Stack Pointer (S) decrements. Some games may place values low in the stack near $0100, since they won't use that many stack entries.
+				<br>
+				<br>
+				Below, you can see the stack in Mesen's memory viewer. At the top of the stack, you can see values being pushed/pulled from the stack. Some games, like this one, 
+				use the bottom of the stack for other purposes since the list of values will never get that big.
+			</p>
+
+			<br>
+			<img src="1001ff.png" style="width: 50%; height: 50%;" alt="The stack in Mesen's memory viewer">
+			<br><br>
+
+			<p class="general-font">
+				One of the stacks most important uses is subroutines. When the CPU runs a JSR (Jump To Subroutine) instruction, it pushes the address of the instruction* onto
+				the stack. When the CPU executes an RTS (Return From Subroutine) instruction, it pulls this address of the stack to return to.
+				<br>
+				<br>
+				*It actually pushes the address of the instruction plus two, and the RTS instruction adds one to the address when it pulls it from the stack. These combined add
+				three to the address of the JSR instruction, which is the address of the instruction after the JSR.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		//loadCodeContent(code, 0);
+	</script>
+</body>

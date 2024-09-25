@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				There is some required code you need to write an NES game.
+				<br>
+				<br>
+				First, create a file called 'main.s'. Other people/guides may name this file 'crt0.s', but it doesn't really matter. Both names mean the same thing.
+			</p>
+
+			<br>
+			<img src="create-main.png" style="width: 33%; height: 33%;" alt="main.s file created in VS Code">
+			<br><br><br>
+
+			<p class="general-font">
+				In this file, begin writing the following code:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				Next, you need to create an NES header. A simple way to create one is to open any game in Mesen, go to Debug -> NES Header Editor.
+			</p>
+
+			<br>
+			<img src="nes-header-editor.png" style="width: 40%; height: 40%;" alt="Mesen's NES header editor">
+			<br><br>
+
+			<p class="general-font">
+				The header above is for a regular NROM cartridge, with horizontal scrolling and standard controllers. This is a great configuration for learning
+				the NES.
+				<br>
+				You can add this to main.s like this:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				Next, you will need to create a layout file for the assembler. CC65 (or more accurately, the linker, LD65) uses this to place the different data sections
+				of an NES game inside an NES ROM.
+				<br>
+				Start by creating a file called 'layout.cfg':
+			</p>
+
+			<br>
+			<img src="create-layout.png" style="width: 33%; height: 33%;" alt="layout.cfg created in VS Code">
+			<br><br><br>
+
+			<p class="general-font">
+				Then, add the following code into layout.cfg:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				The layout file contains two sections: MEMORY and SEGMENTS. The MEMORY field specifies each section of the ROM file, in order. The 'start' option specifies
+				how the linker determines addresses inside the ROM.
+				<br>
+				<br>
+				Next, you need to create 'compile.bat' - for the sake of organization, you should put this inside a folder called 'build'.
+			</p>
+
+			<br>
+			<img src="create-compile.png" style="width: 40%; height: 40%;" alt="compile.bat and build folder created in VS Code"> 
+			<br><br><br>
+
+			<p class="general-font">
+				This file will compile/assemble your game, and open the emulator to run the game.
+				<br>
+				Write this inside compile.bat:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-3"></p>
+			</div>
+			<br><br>
+
+			<p class="general-font">
+				Finally, you can create a build task in VS Code - this will run compile.bat when you press Ctrl+Shift+B. This will make it quick to test your game.
+				<br>
+				You can create a build task by creating a folder called '.vscode', and inside this folder, create a file called 'tasks.json'. Inside this file, put
+				the following code:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-4"></p>
+			</div>
+			<br><br>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 4);
+	</script>
+</body>

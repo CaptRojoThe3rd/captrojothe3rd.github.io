@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br><br>
+			
+			<a class="url-font" href="https://cc65.github.io/getting-started.html" target="_blank">Download CC65 here</a>
+
+			<br><br>
+			
+			<p class="general-font">
+				CC65 is a compiler suite for the 6502, the processor that the NES's processor (the 2A03) is based on.
+				<br>
+				<br>
+				When you download it, you can choose where you want to install it. If you are on Windows, I recommend just putting it in C:\ or in C:\Users\&lt;yourname&gt;.
+				<br>
+				You should also <a href="https://windowsloop.com/how-to-add-to-windows-path/" target="_blank">add it to PATH/your enviroment variables</a>.
+				<br>
+				<br>
+				CC65 contains CA65, which is an assembler for the 6502. It is what will turn the code you write into an NES ROM file that an emulator can understand.
+			</p>
+
+			<br>
+			<img src="cc65.png" style="width: 25%; height: 25%;">
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+	</script>
+</body>

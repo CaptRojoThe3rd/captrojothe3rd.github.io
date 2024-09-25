@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				Adding CHR data is required* if you want your NES game to.. well.. display anything on the screen. A base NROM cartridge can store 8 KiB of CHR-ROM. 
+				<br>
+				<br>
+				To include CHR data, you must first create the file that the CHR-ROM is stored in. Name it 'alpha.chr', and make it 8 KiB in size using a hex editor. 
+				You should put it in a folder called 'chr' for organization, since YYCHR will create other files depending on what you do with it.
+			</p>
+
+			<br>
+			<img src="create-alphachr.png" style="width: 25%; height: 25%;" alt="chr folder and alpha.chr created in VS Code">
+			<img src="make-8k.png" style="width: 38%; height: 38%;" alt="Made CHR file 8KiB with hex editor">
+			<br><br><br>
+
+			<p class="general-font">
+				You can delete the file named 'alpha.chr.bak' if it is created. It's just a backup of an empty file.
+				<br>
+				<br>
+				Then, you can add this code to 'main.s':
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br><br><br>
+
+			<p class="general-font">
+				*Well, there is a way to render stuff without CHR data, but it's extremely limited. It's similar to the Atari 2600's graphics, but even more limited. You see,
+				if you disable background and sprite rendering in the PPU, the PPU still displays a solid color. Normally, this is just the background color, stored at $3f00 in
+				the PPU's memory. However, if you set the PPU's bus address (Register $2006) to a different palette address between $3f01-$3f1f, the PPU will actually display 
+				that color instead of the background color at $3f00. 
+				<a href="https://www.nesdev.org/wiki/Full_palette_demo" target="_blank">Here's a demo of every color the NES can display using this trick</a>
+			</p>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 0);
+	</script>
+</body>

@@ -1,59 +1,510 @@
+
 body {
-	background-color: #202830;
-	color: white;
-}
-
-.top-area {
-	background-color: #303850;
-	margin-left: -8px;
-	margin-top: -30px;
-	margin-right: -8px;
-	margin-bottom: 70px;
-	padding: 5px;
-}
-.title {
-	font-family: "Minecraftia";
-	font-size: 30px;
-	text-align: center;
-	margin: auto;
-	width: 50%;
-}
-.normal-centered-text {
-	font-family: Arial;
-	margin: auto;
-	width: 50%;
-	text-align: center;
-	font-size: 14px;
-	margin-top: -50px;
-	margin-bottom: 50px;
-}
-.minecraftia-centered-text {
-	font-family: "Minecraftia";
-	font-size: 15px;
-	text-align: center;
-	margin: auto;
-	width: 50%;
-}
-.yt-sub-button-centered {
-	margin: auto;
-	width: 166px;
-}
-.subtitle-adjust {
-	margin-top: -20px;
-}
-.top-area-button {
-	background-color: #505080;
+	background-color: #282828;
 	color: #ffffff;
-	border-color: #90909f;
-	width: 150px;
-	height: 30px;
-	font-family: "Minecraftia";
-	padding-top: 3px;
-	margin-top: -10px;
+
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	outline: 0px;
+}
+
+a {
+	color: #ffffff;
+
+	cursor: pointer;
+}
+
+a:link {
+	color: #ffffff;
+}
+
+a:visited {
+	color: #ffffff;
+}
+
+a:hover {
+	color: #ffffff;
+}
+
+a:active {
+	color: #ffffff;
+}
+
+img {
+	margin-left: 20px;
 }
 
 
-@font-face {
-	font-family: "Minecraftia";
-	src: url("https://captrojothe3rd.github.io/Minecraftia.ttf");
+
+.website-title-bg {
+	background-color: #206080;
+	color: #ffffff;
+
+	display: inline-block;
+	width: 100%;
+}
+
+.website-title-pages-bg {
+	background-color: #104060;
+	color: #ffffff;
+
+	display: inline-block;
+	width: 100%;
+}
+
+.general-bg {
+	background-color: #282828;
+	color: #ffffff;
+
+	margin-left: 20px;
+}
+
+.nes-bg {
+	background-color: #282828;
+	color: #ffffff;
+
+	width: 75%;
+
+	margin: 0px;
+
+	float: left;
+}
+
+.nes-sidebar {
+	background-color: #403050;
+	color: #ffffff;
+
+	min-width: 300px;
+	min-height: 818px;
+
+	padding-right: 15px;
+
+	margin-left: 0px;
+	margin-bottom: 0px;
+	margin-top: -10px;
+	margin-right: 40px;
+
+	float: left;
+}
+
+
+
+.title-font {
+	color: #ffffff;
+	
+	padding: 0;
+	margin: 10px;
+
+	font-family: Verdana;
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.subtitle-font {
+	color: #ffffff;
+	
+	padding: 0;
+	margin: 10px;
+
+	font-family: Verdana;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.general-font {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.url-font {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 24px;
+
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.mono-font {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Consolas;
+	font-size: 18px;
+	line-height: 22px;
+
+	white-space: pre;
+}
+
+.code-font {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+	margin-left: 50px;
+
+	font-family: Consolas;
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.indent {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 22px;
+
+	position: relative;
+	margin-left: 40px;
+}
+
+.url-indent {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 24px;
+
+	text-decoration: underline;
+	cursor: pointer;
+
+	margin-left: 40px;
+}
+
+.url-indent-2 {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 24px;
+
+	text-decoration: underline;
+	cursor: pointer;
+
+	margin-left: 80px;
+}
+
+.url-indent-3 {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+
+	font-family: Roboto;
+	font-size: 18px;
+	line-height: 24px;
+
+	text-decoration: underline;
+	cursor: pointer;
+
+	margin-left: 120px;
+}
+
+.game-box-title-font {
+	color: #ffffff;
+
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+
+	font-family: Helvetica;
+	font-size: 22px;
+	line-height: 25px;
+}
+
+.game-box-font {
+	color: #ffffff;
+
+	padding: 0px;
+	margin: 0px;
+
+	font-family: Roboto;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+
+
+
+.pages-button {
+	background-color: #104060;
+	color: #ffffff;
+
+	border-color: #104060;
+	border-style: solid;
+
+	min-width: 50px;
+	min-height: 30px;
+
+	padding: 10px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.pages-button:hover {
+	transition: all 50ms ease;
+
+	background-color: #406080;
+	color: #ffffff;
+
+	border-color: #406080;
+	border-style: solid;
+
+	min-width: 50px;
+	min-height: 30px;
+
+	padding: 10px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.big-button {
+	background-color: #104060;
+	color: #ffffff;
+
+	border-color: #206080;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 25px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.big-button:hover {
+	transition: all 50ms ease;
+
+	background-color: #406080;
+	color: #ffffff;
+
+	border-color: #6080a0;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 25px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.big-button:active {
+	background-color: #104060;
+	color: #ffffff;
+
+	border-color: #105070;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 25px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.reg-button {
+	background-color: #104060;
+	color: #ffffff;
+
+	border-color: #206080;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 10px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.reg-button:hover {
+	transition: all 50ms ease;
+
+	background-color: #406080;
+	color: #ffffff;
+
+	border-color: #6080a0;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 10px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.reg-button:active {
+	background-color: #104060;
+	color: #ffffff;
+
+	border-color: #105070;
+	border-style: solid;
+
+	min-width: 100px;
+	min-height: 50px;
+
+	padding: 10px;
+	margin: 0px;
+
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+
+
+.input-field {
+	background-color: #404040;
+	border-color: #7f00ff;
+	color: #ffffff;
+
+	font-size: 18px;
+	font-family: Consolas;
+
+	width: 200px;
+}
+
+
+
+.game-box {
+	background-color: #303038;
+	color: #ffffff;
+
+	width: 350px;
+	height: 450px;
+
+	padding: 10px;
+	margin: 25px;
+
+	border-style: solid;
+	border-width: 7px;
+	border-radius: 15px;
+	border-color: #202828;
+
+	display: inline-block;
+
+	font-size: 18px;
+	font-family: Helvetica;
+
+	text-align: left;
+	position: relative;
+}
+
+.game-box:hover {
+	background-color: #383840;
+	color: #ffffff;
+
+	width: 350px;
+	height: 450px;
+
+	padding: 10px;
+	margin: 25px;
+
+	border-style: solid;
+	border-width: 7px;
+	border-radius: 15px;
+	border-color: #304040;
+
+	display: inline-block;
+
+	font-size: 18px;
+	font-family: Helvetica;
+
+	text-align: left;
+	position: relative;
+}
+
+.game-area {
+	text-align: center;
+}
+
+.game-platform {
+	background-color: #808080;
+	color: #ffffff;
+
+	width: 55px;
+	height: 30px;
+
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+
+	padding: 2px;
+	padding-top: 0px;
+
+	border-radius: 7px 0px 7px 0px;
+
+	font-family: Verdana;
+	font-size: 26px;
+
+	position: absolute;
+}
+
+
+
+.game-image {
+	width: 370px;
+	height: 330px;
+
+	margin-left: -10px;
+	margin-top: -10px;
+	margin-right: -10px;
+	margin-bottom: 3px;
+
+	border-radius: 7px 7px 0px 0px;
+}
+
+
+
+.code-object {
+	background-color: #202020;
+	color: #ffffff;
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	margin: 20px;
+	margin-top: 0px;
 }

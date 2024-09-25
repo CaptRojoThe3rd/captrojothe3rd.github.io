@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+	<title>NES Dev Guide - captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../../../styles.css">
+	<script src="../../../../../pages.js"></script>
+	<script src="../../../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+			
+			<p class="general-font">
+				Labels allow you to assign a name to a memory location. For organization, you should try to store most of these in a seperate file. I usually take it one step
+				further, by seperating the labels for PPU and APU registers and the labels for RAM.
+				<br>
+				<br>
+				So, I would recommend creating a folder called 'labels'. Then, create two files called 'nes.s' and 'labels.s':
+			</p>
+
+			<br>
+			<img src="labels.png" style="width: 25%; height: 25%;" alt="Label folder and files created in VS Code">
+			<br><br><br>
+
+			<p class="general-font">
+				Inside 'nes.s', you can put all of the labels for the NES's registers, as well as a few constants:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Then, inside main.s, we can include the label files:
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 1);
+	</script>
+</body>

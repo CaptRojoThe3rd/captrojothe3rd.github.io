@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <head>
+	<title>captrojothe3rd.github.io</title>
 	<link rel="stylesheet" href="styles.css">
-	<script src="https://apis.google.com/js/platform.js"></script>
+	<script src="pages.js"></script>
 </head>
 <body>
-	<div class="top-area" style="height: 150px;">
-		<div class="title">
-			<p>
-				captrojothe3rd.github.io
-			</p>
-		</div>
-		<div id="chrome-height-adjust" style="height: 0px;"></div>
-		<div class="subtitle-adjust">
-			<div class="normal-centered-text">
-				<p>
-					eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-				</p>
-			</div>
-			<div style="width: 50%; margin: auto; margin-top: -20px;">
-				<center>
-					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io'">Home</button>
-					<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io/calculators'">Calculators</button>
-					<!--<button class="top-area-button" onclick="window.location.href='https://captrojothe3rd.github.io/nesguide'">NES Programming</button>-->
-				</center>
-			</div>
+	<div class="website-title-bg">
+		<p class="title-font">captrojothe3rd.github.io</p>
+		<p class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg">
+			<button class="pages-button" onclick="goToPage('home/index.html');">Home</button>
+			<button class="pages-button" onclick="goToPage('projmotioncalc/index.html');">Projectile Motion Calc</button>
 		</div>
 	</div>
-	<div class="minecraftia-centered-text">
-		<p>YouTube Channel</p>
-	</div>
-	<div class="yt-sub-button-centered">
-		<div class="g-ytsubscribe" data-channelid="UCeyEdoNTDMrvNIsUFQYMITg" data-layout="full" data-theme="dark" data-count="default"></div>
-	</div>
+
 	<script>
-		if (navigator.userAgent.indexOf("Chrome") != -1) {
-			document.getElementById("chrome-height-adjust").style.height = "20px";
+		loadPageButtons();
+		if (!is_debug)
+		{
+			goToPage('home/index.html');
 		}
 	</script>
 </body>

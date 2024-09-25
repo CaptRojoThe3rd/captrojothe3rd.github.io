@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+	<title>captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../styles.css">
+	<script src="../pages.js"></script>
+	<script src="numsorter.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+	
+	<div class="general-bg">
+		<br>
+
+		<p class="general-font">
+			Number Sorter + Median, Mean, Quartile, IQR, Range, & Deviation Finder
+		</p>
+
+		<br>
+
+		<input type="text" placeholder="Enter numbers... (Ex: 5, 4, 2, 7, 1)" id="raw_user_input" class="input-field" style="width: 25%; min-width: 450px;"/>
+		<input type="text" placeholder="Separator..." id="separator" class="input-field" style="width: 5%; min-width: 150px;"/>
+
+		<br>
+
+		<button type="button" onclick="sort_and_calculate(false);" class="big-button" style="width: 10%; min-width: 204px;">Sort</button>
+		<button type="button" onclick="sort_and_calculate(true);" class="big-button" style="width: 10%; min-width: 204px;">Sort & Calculate</button>
+		<button type="button" onclick="reset_input();" class="big-button" style="width: 10%; min-width: 204px;">Reset</button>
+
+		<br>
+
+		<p class="mono-font" id="number_sorter_output"></p>
+	</div>
+
+	<script>
+		loadPageButtons();
+	</script>
+</body>
