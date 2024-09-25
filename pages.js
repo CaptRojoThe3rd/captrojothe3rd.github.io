@@ -11,7 +11,7 @@ const title = "captrojothe3rd.github.io";
 const subtitle = "Stupid website I made for some reason";
 
 //const url_prefix = "file:///C:/Users/silve/Documents/Github/captrojothe3rd.github.io/";
-const url_prefix = "captrojothe3rd.github.io/";
+const url_prefix = "https://captrojothe3rd.github.io/";
 
 const is_debug = true;
 
