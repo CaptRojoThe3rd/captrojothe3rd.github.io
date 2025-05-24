@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+	<title>captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script src="../../../pages.js"></script>
+	<script src="../../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+
+			<p class="general-font">
+				The PPU has its own registers. The CPU can talk to the PPU through these registers. These registers are memory-mapped, meaning that the CPU can access them
+				with simple load and store instructions.
+				<br>
+				<br>
+				The PPU has 8 memory-mapped registers, mapped to $2000-$2007. They are mirrored throughout $2008-$3fff.
+				<br>
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-0"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				The PPU Control register controls multiple aspects of the PPU. Many flags are mapped to one or two bits:
+				<br>
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-1"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				The Base Nametable Address has to do with scrolling. The VRAM Address Increment controls how the PPU automatically increments the VRAM address when reading from/writing
+				to VRAM (if you're writing tile data, +1 moves to the tile to the right; +32 moves to the tile to the bottom). The sprite and background tile address controls where the PPU
+				gets sprite and background data from on the cartridge.
+				<br>
+				<br>
+				The PPU Mask register controls PPU rendering.
+				<br>
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-2"></p>
+			</div>
+			<br>
+
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, 1);
+	</script>
+</body>

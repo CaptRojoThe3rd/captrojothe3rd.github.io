@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+	<title>captrojothe3rd.github.io</title>
+	<link rel="stylesheet" href="../../styles.css">
+	<script src="../../pages.js"></script>
+	<script src="../nespages.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<div class="website-title-bg">
+		<p id="title" class="title-font">captrojothe3rd.github.io</p>
+		<p id="subtitle" class="subtitle-font">Stupid website I made for some reason</p>
+		<div id="page-button-content" class="website-title-pages-bg"></div>
+	</div>
+
+	<div>
+		<div class="nes-sidebar" id="nes-page-button-content"></div>
+
+		<div class="nes-bg" id="nes-content">
+			<br>
+
+			<p class="general-font">
+				The PPU, or Picture Processing Unit, is the graphics chip of the NES. It's responsible for displaying a game's graphics on the screen.
+				<br>
+			</p>
+
+			<br><br>
+			<img src="ppu_chip.jpg" style="width: 33%; height: 33%;" alt="The PPU chip">
+			<br><br><br>
+
+			<p class="general-font">
+				The PPU has two ways of rendering things on the screen: the background and the sprites. The background is a mostly stationary layer meant for, well, backgrounds of
+				things. It is made up of tiles that can't move independently of each other. The sprites are small tiles that can move independently of each other - these are useful for
+				things that move a lot, like characters or moving platforms.
+				<br>
+				<br>
+				On the left, you can see only the background; on the right, only sprites:
+				<br>
+			</p>
+
+			<br><br>
+			<img src="background_only.png" style="width: 33%; height: 33%;" alt="SMB3 with only the background shown">
+			<img src="sprites_only.png" style="width: 33%; height: 33%;" alt="SMB3 with only sprites shown">
+			<br><br><br>
+		</div>
+	</div>
+
+	<script>
+		loadPageButtons();
+		loadNESPageButtons();
+
+		loadCodeContent(code, -1);
+	</script>
+</body>
