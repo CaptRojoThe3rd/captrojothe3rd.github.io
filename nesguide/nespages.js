@@ -48,6 +48,11 @@ const nes_page_buttton_content = `
 	<a class="url-indent-2" onclick="goToPage('nesguide/nescpu/6502assembly/illegalinstructions/index.html');">3.1.5 - Illegal Instructions</a>
 	<br>
 	<a class="url-indent" onclick="goToPage('nesguide/nescpu/interrupts/index.html');">3.2 - Interrupts</a>
+	
+	<br>
+	<a class="url-font" onclick="goToPage('nesguide/ppu/index.html');">4 - The PPU</a>
+	<br>
+	<a class="url-indent" onclick="goToPage('nesguide/ppu/registers/index.html');">4.1 - PPU Registers</a>
 `;
 
 function loadNESPageButtons()

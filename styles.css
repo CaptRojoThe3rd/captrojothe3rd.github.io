@@ -112,6 +112,20 @@ img {
 	line-height: 20px;
 }
 
+.next-to-subtitle-font {
+	color: #ffffff;
+
+	padding: 0;
+	margin: 10px;
+	margin-top: -30px;
+
+	float: right;
+	
+	font-family: Verdana;
+	font-size: 20px;
+	line-height: 20px;
+}
+
 .general-font {
 	color: #ffffff;
 

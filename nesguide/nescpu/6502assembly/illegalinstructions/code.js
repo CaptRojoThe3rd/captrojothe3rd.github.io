@@ -15,5 +15,11 @@ SAX
 SLO
 SRE
 STP*
+`,
+
+`
+.macro stp
+	.byte $22
+.endmacro
 `
 ];

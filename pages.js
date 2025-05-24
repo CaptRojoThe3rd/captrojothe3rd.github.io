@@ -10,8 +10,11 @@ const page_button_content = `
 const title = "captrojothe3rd.github.io";
 const subtitle = "Stupid website I made for some reason";
 
-//const url_prefix = "file:///C:/Users/silve/Documents/Github/captrojothe3rd.github.io/";
-const url_prefix = "https://captrojothe3rd.github.io/";
+const quote_element = '<p class="next-to-subtitle-font" id="quote">lmao</p>';
+const quote_text = "The mitochondria is the powerhouse of the cell";
+
+const url_prefix = "file:///C:/Users/silve/Documents/Github/captrojothe3rd.github.io/";
+//const url_prefix = "https://captrojothe3rd.github.io/";
 
 const is_debug = true;
 
@@ -19,7 +22,19 @@ function loadPageButtons()
 {
 	document.getElementById("page-button-content").innerHTML = page_button_content;
 	document.getElementById("title").innerHTML = title;
-	document.getElementById("subtitle").innerHTML = subtitle;	
+	document.getElementById("subtitle").innerHTML = subtitle;
+
+	var quote = document.createElement("p");
+	quote.textContent = quote_text;
+	quote.className = "next-to-subtitle-font";
+	quote.id = "quote";
+	document.getElementById("subtitle").after(quote);
+
+	if (window.innerWidth < 900)
+	{
+		document.getElementById("quote").style["margin-top"] = "20";
+		document.getElementById("quote").style["float"] = "left";
+	}
 }
 
 function goToPage(page)
