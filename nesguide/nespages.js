@@ -53,6 +53,8 @@ const nes_page_buttton_content = `
 	<a class="url-font" onclick="goToPage('nesguide/ppu/index.html');">4 - The PPU</a>
 	<br>
 	<a class="url-indent" onclick="goToPage('nesguide/ppu/registers/index.html');">4.1 - PPU Registers</a>
+	<br>
+	<a class="url-indent" onclick="goToPage('nesguide/ppu/vram/index.html');">4.2 - VRAM</a>
 `;
 
 function loadNESPageButtons()

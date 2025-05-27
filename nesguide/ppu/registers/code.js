@@ -34,5 +34,14 @@ BGRs bMmG
 ||+------- Emphasize red (green on PAL/Dendy)
 |+-------- Emphasize green (red on PAL/Dendy)
 +--------- Emphasize blue
+`,
+
+`
+VSOx xxxx
+|||| ||||
+|||+-++++- (PPU open bus or 2C05 PPU identifier)
+||+------- Sprite overflow flag. Broken
+|+-------- Sprite 0 hit flag
++--------- Vblank flag, cleared on read. Unreliable
 `
 ];

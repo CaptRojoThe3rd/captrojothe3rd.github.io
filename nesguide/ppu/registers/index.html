@@ -51,7 +51,7 @@
 				gets sprite and background data from on the cartridge.
 				<br>
 				<br>
-				The PPU Mask register controls PPU rendering.
+				The PPU Mask register controls PPU rendering:
 				<br>
 			</p>
 
@@ -61,6 +61,40 @@
 			</div>
 			<br>
 
+			<p class="general-font">
+				The most important bits are bits 1-4 -- they tell the PPU to actually render things on the screen.
+				<br>
+				<br>
+				The PPU Status register gives some important info about the state of the PPU:
+				<br>
+			</p>
+
+			<br>
+			<div class="code-object">
+				<p class="code-font" id="code-3"></p>
+			</div>
+			<br>
+
+			<p class="general-font">
+				Bit 7 is the vBlank flag - it is set when the console reaches the end of the frame. Since the PPU already generates an interrupt, its main use is
+				to check whether the PPU has finished initializing at console reset.
+				<br>
+				Bit 6 is the Sprite 0 Hit flag - it is polled by games to wait for a specific point in rendering, determined by the position of the first sprite. It is
+				used by games like Super Mario Bros. and The Legend of Zelda to have a fixed HUD above a scrolling level.
+				<br>
+				Bit 5 is the sprite overflow bit. It was intended to tell the game that too many sprites tried to render on one scanline (8 sprite limit). However, it is
+				bugged and can generate both false negatives and false positives. You can use it if you are careful, but only in specific circumstances.
+				<br>
+				<br>
+				The rest of the PPU's registers are fairly simple. OAMADDR and OAMDATA are meant to be used for writing sprites, but they aren't really necessary and are
+				actually unreliable on some consoles. Just set OAMADDR to zero and don't touch it.
+				<br>
+				PPUSCROLL is for scrolling the background layer. It takes two writes: first, the byte for X position; and second, the byte for Y position.
+				<br>
+				PPUADDR and PPUDATA are used for writing to VRAM. The address takes two writes: high byte first, then low. The PPUDATA register can then be used to write
+				to VRAM, and will automatically increment PPUADDR according to PPUCTRL.
+			</p>
+
 		</div>
 	</div>
 
@@ -68,6 +102,6 @@
 		loadPageButtons();
 		loadNESPageButtons();
 
-		loadCodeContent(code, 1);
+		loadCodeContent(code, 3);
 	</script>
 </body>

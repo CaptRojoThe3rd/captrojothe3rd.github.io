@@ -11,9 +11,8 @@ const title = "captrojothe3rd.github.io";
 const subtitle = "Stupid website I made for some reason";
 
 const quote_element = '<p class="next-to-subtitle-font" id="quote">lmao</p>';
-const quote_text = "The mitochondria is the powerhouse of the cell";
+const quote_text = "'; DROP ALL TABLES; --";
 
-//const url_prefix = "file:///C:/Users/silve/Documents/Github/captrojothe3rd.github.io/";
 const url_prefix = "https://captrojothe3rd.github.io/";
 
 const is_debug = true;
